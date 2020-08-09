@@ -68,7 +68,7 @@ apiRouter.post("/air_content_input", async (req, res) => {
             //text: "입력되었습니닷!",
             text: info  
           },
-        },
+                  },
       ],
     },
   };
