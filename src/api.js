@@ -77,7 +77,6 @@ apiRouter.post("/air_content_input", (req, res) => {
   var wri = getName(wri);
   var wri = wri[0].name
 
-  setTimeout(function(){
    base("testing").create({
     날짜: date,
     거래처2: buyer,
@@ -93,7 +92,6 @@ apiRouter.post("/air_content_input", (req, res) => {
       getRecordId.set_id(record_id);
       console.log(getRecordId.get_id());
   });
-},3000);
 
 setTimeout(function(){
   const responseBody = {
@@ -111,7 +109,7 @@ setTimeout(function(){
 
   res.status(200).send(responseBody);
  
-},6000);
+},2000);
 })
 
 apiRouter.post("/air_pic_input", (req, res) => {
