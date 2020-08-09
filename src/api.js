@@ -25,8 +25,7 @@ app.use(
 
 app.use("/.netlify/functions/api", apiRouter);
 var today = new Date();
-var date =
-  today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //
+var date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); 
 
 //클로저 함수 시작
 function setArray(arr) {
@@ -43,21 +42,53 @@ function setArray(arr) {
   };
 }
 
-const item = setArray([]);
+const item = setArray();
 //클로저 함수 끝
+
+//클로저 함수 시작(for get record Id)
+function setArray2(arr2) {
+  return {
+    get_arr2: function () {
+      return arr2;
+    },
+    set_arr2: function (_id) {
+      arr2.push(_id);
+  }
+};
+}
+
+const getRecordId = setArray2([]);
+//클로저 함수 끝(for get record Id)
 
 
 apiRouter.post("/air_content_input", async (req, res) => {
   
-  //var content = JSON.stringify(req.body.action.detailParams.customer.origin); 
-  //var writer = JSON.stringify(req.body.userRequest.user.id); 
-  var info = JSON.stringify(req.body);
-
+  var buyer = JSON.stringify(req.body.action.detailParams.customer.origin); 
+  var buyer = buyer.replace(/\"/g, "");
   
-  //var contents = content.replace(/\"/g, "");
-  //var wri = writer.replace(/\"/g, "");
-  //var wri = getName(wri);
-  //var wri = wri[0].name
+  var content = JSON.stringify(req.body.action.detailParams.contents.origin);  
+  var contents = content.replace(/\"/g, "");
+
+  var writer = JSON.stringify(req.body.userRequest.user.id);
+  var wri = writer.replace(/\"/g, "");
+  var wri = getName(wri);
+  var wri = wri[0].name
+
+  await base("testing").create({
+    날짜: date,
+    거래처2: buyer,
+    작성자: wri,
+    내용: contents,
+  }, function(err, record) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+      console.log(record.getId()); 
+      var record_id = record.getId();
+      getRecordId.set_arr2(record_id);
+      console.log(getRecordId.get_arr2());
+  });
 
   const responseBody = {
     version: "2.0",
@@ -65,10 +96,9 @@ apiRouter.post("/air_content_input", async (req, res) => {
       outputs: [
         {
           simpleText: {
-            //text: "입력되었습니닷!",
-            text: info  
+            text: "입력완료(사진첨부를 원하면 '사진첨부'를 클릭하세요)",
           },
-                  },
+        },
       ],
     },
   };
@@ -77,51 +107,25 @@ apiRouter.post("/air_content_input", async (req, res) => {
 });
 
 apiRouter.post("/air_pic_input", (req, res) => {
-  var pic = JSON.stringify(req.body.action.detailParams.file.origin);
-  item.set_arr(pic);
-  var pic2 = item.get_arr();
-  var pic2 = pic2.join(",");
+
+  var buyer = JSON.stringify(req.body.action.detailParams.customer.origin); 
+  
+  var k = getRecordId.get_arr2();
+  console.log(k);
 
   const responseBody = {
     version: "2.0",
-    data: {
-      msg: "HI",
-      name: "Ryan",
-      position: "Senior Managing Director",
-    },
     template: {
       outputs: [
         {
-          basicCard: {
-            title: "AIRTABLE",
-            description: "DO AIRTABLE",
-            thumbnail: {
-              imageUrl:
-                "http://k.kakaocdn.net/dn/83BvP/bl20duRC1Q1/lj3JUcmrzC53YIjNDkqbWK/i_6piz1p.jpg",
-            },
-            profile: {
-              imageUrl:
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4BJ9LU4Ikr_EvZLmijfcjzQKMRCJ2bO3A8SVKNuQ78zu2KOqM",
-              nickname: "보물상자",
-            },
-            social: {
-              like: 1238,
-              comment: 8,
-              share: 780,
-            },
-            buttons: [
-              {
-                action: "block",
-                label: "내용입력하기",
-                blockId: "5f1928d4285a140001494e12",
-              },
-            ],
+          simpleText: {
+            text: k,
           },
         },
       ],
     },
   };
-  //
+  
   res.status(200).send(responseBody);
 });
 

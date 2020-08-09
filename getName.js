@@ -1,9 +1,9 @@
 const getName = (wri) => data.filter(el=> el.wri === wri ) //getName[0].name 으로 호출
 
-//user Id changed too after changing bot
+
 const data = [
   {
-    "wri": "2c8017c334109ed356f928ecf6ba3ef80683e3634ca15ee80f7fb14c44765c4343",
+    "wri": "2c2e571aa09087b61c573115011b68b41683e3634ca15ee80f7fb14c44765c4343",
     "name": "임진석"
   },
   {
