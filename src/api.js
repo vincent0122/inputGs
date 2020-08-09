@@ -93,7 +93,7 @@ apiRouter.post("/air_content_input", async (req, res) => {
         {
           simpleText: {
             text: "입력되었습니닷!",
-            text: info
+            text: info  
           },
         },
       ],
