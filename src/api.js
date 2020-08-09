@@ -61,7 +61,7 @@ const getRecordId = setArray2([]);
 //클로저 함수 끝(for get record Id)
 
 
-apiRouter.post("/air_content_input", async (req, res) => {
+apiRouter.post("/air_content_input", (req, res) => {
   
   var buyer = JSON.stringify(req.body.action.detailParams.customer.origin); 
   var buyer = buyer.replace(/\"/g, "");
@@ -74,21 +74,21 @@ apiRouter.post("/air_content_input", async (req, res) => {
   var wri = getName(wri);
   var wri = wri[0].name
 
-  await base("testing").create({
+   base("testing").create({
     날짜: date,
     거래처2: buyer,
     작성자: wri,
     내용: contents});
-  //}, function(err, record) {
-  //  if (err) {
-  //    console.error(err);
-  //    return;
-  //  }
-  //    console.log(record.getId()); 
-  //    var record_id = record.getId();
-  //    getRecordId.set_arr2(record_id);
-  //    console.log(getRecordId.get_arr2());
-  //});
+  }, function(err, record) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+      console.log(record.getId()); 
+      //var record_id = record.getId();
+      //getRecordId.set_arr2(record_id);
+      //console.log(getRecordId.get_arr2());
+  });
 
 
   const responseBody = {
@@ -97,7 +97,7 @@ apiRouter.post("/air_content_input", async (req, res) => {
       outputs: [
         {
           simpleText: {
-            text: "입력완료(사진첨부를 원하면 '사진첨부'를 클릭하세요)",
+            text: "입력완료(사진첨부를 원하면 '사진첨부'를 크을릭)",
           },
         },
       ],
@@ -108,11 +108,6 @@ apiRouter.post("/air_content_input", async (req, res) => {
 });
 
 apiRouter.post("/air_pic_input", (req, res) => {
-
-  var buyer = JSON.stringify(req.body.action.detailParams.pic.origin); 
-  
-  var k = getRecordId.get_arr2();
-  console.log(k);
 
   const responseBody = {
     version: "2.0",
