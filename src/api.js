@@ -42,22 +42,25 @@ function setArray(arr) {
   };
 }
 
-const item = setArray();
+const item = setArray([]);
 //클로저 함수 끝
 
 //클로저 함수 시작(for get record Id)
-function setArray2(arr2) {
+function setArray2(ids) {
   return {
-    get_arr2: function () {
-      return arr2;
+    get_id : function () {
+      return ids;
     },
-    set_arr2: function (_id) {
-      arr2.push(_id);
+    set_id : function (_ids) {
+      ids.push( _ids)   //왜 var로 선언을 하지 않지?
   }
 };
 }
 
+
+
 const getRecordId = setArray2([]);
+
 //클로저 함수 끝(for get record Id)
 
 
@@ -78,16 +81,16 @@ apiRouter.post("/air_content_input", (req, res) => {
     날짜: date,
     거래처2: buyer,
     작성자: wri,
-    내용: contents});
+    내용: contents
   }, function(err, record) {
     if (err) {
       console.error(err);
       return;
     }
       console.log(record.getId()); 
-      //var record_id = record.getId();
-      //getRecordId.set_arr2(record_id);
-      //console.log(getRecordId.get_arr2());
+      var record_id = record.getId();
+      getRecordId.set_id(record_id);
+      console.log(getRecordId.get_id());
   });
 
 
@@ -108,6 +111,13 @@ apiRouter.post("/air_content_input", (req, res) => {
 });
 
 apiRouter.post("/air_pic_input", (req, res) => {
+
+
+  var k = getRecordId.get_id();
+  
+  setTimeout(function(){
+    console.log(k);
+  },3000);
 
   const responseBody = {
     version: "2.0",

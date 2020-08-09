@@ -1,3 +1,5 @@
+
+
 function setArray2(arr2) {
     return {
       get_arr2: function () {
@@ -10,11 +12,12 @@ function setArray2(arr2) {
   }
 
   const getRecordId = setArray2([]);
-
   
  function sum() {
      getRecordId.set_arr2("123");
  };
+
+ 
 
  function read(){
      var k = getRecordId.get_arr2();
@@ -25,21 +28,10 @@ function setArray2(arr2) {
  sum();
  sum();
 
+ setArray2([1,2]);
+ sum();
  read();
+ console.log(setArray2);
  //console.log(k);
 
  //console.log(getRecordId.get_arr2());
-
- base('testing').create({
-    "날짜": "2020-08-09",
-    "작성자": "임진석",
-    "거래처": "호승글로벌",
-    "분류": "계약진행(자료송부)",
-    "내용": "123\n"
-  }, function(err, record) {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    console.log(record.getId());
-  });
