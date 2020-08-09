@@ -85,9 +85,9 @@ apiRouter.post("/air_content_input", async (req, res) => {
   //    return;
   //  }
   //    console.log(record.getId()); 
-  //    var record_id = record.getId();
-  //    getRecordId.set_arr2(record_id);
-  //    console.log(getRecordId.get_arr2());
+      var record_id = record.getId();
+      getRecordId.set_arr2(record_id);
+      console.log(getRecordId.get_arr2());
   //});
 
   const responseBody = {
