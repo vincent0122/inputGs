@@ -49,15 +49,15 @@ const item = setArray([]);
 
 apiRouter.post("/air_content_input", async (req, res) => {
   
-  var content = JSON.stringify(req.body.action.detailParams.customer.origin); 
-  var writer = JSON.stringify(req.body.userRequest.user.id); 
+  //var content = JSON.stringify(req.body.action.detailParams.customer.origin); 
+  //var writer = JSON.stringify(req.body.userRequest.user.id); 
   var info = JSON.stringify(req.body);
 
   
-  var contents = content.replace(/\"/g, "");
-  var wri = writer.replace(/\"/g, "");
-  var wri = getName(wri);
-  var wri = wri[0].name
+  //var contents = content.replace(/\"/g, "");
+  //var wri = writer.replace(/\"/g, "");
+  //var wri = getName(wri);
+  //var wri = wri[0].name
 
   const responseBody = {
     version: "2.0",
