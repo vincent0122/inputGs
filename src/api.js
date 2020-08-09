@@ -49,42 +49,15 @@ const item = setArray([]);
 
 apiRouter.post("/air_content_input", async (req, res) => {
   
-  var content = JSON.stringify(req.body.action.detailParams.type01_q01s01.origin); 
+  var content = JSON.stringify(req.body.action.detailParams.customer.origin); 
   var writer = JSON.stringify(req.body.userRequest.user.id); 
   var info = JSON.stringify(req.body);
 
-  try {
-    var pic = JSON.stringify(req.body.action.detailParams.pic.origin);
-  } catch (e) {
-    var pic = "";
-  } finally {
-    var pu2 = ['""', '""', '""', '""', '""', '""', '""', '""'];
-    var pic2 = pic.replace(/\"/g, "");
-    var pic3 = pic2.substring(5, pic2.length - 1);
-    var pu = pic3.split(",");
-
-    for (i = 0; i < pu.length; i++) {
-      pu2[i] = pu[i];
-    }
-  }
-
+  
   var contents = content.replace(/\"/g, "");
   var wri = writer.replace(/\"/g, "");
   var wri = getName(wri);
   var wri = wri[0].name
-
-   await base("총무,수출입").create({
-    Attachments: [
-      { url: pu2[0] },
-      { url: pu2[1] },
-      { url: pu2[2] },
-      { url: pu2[3] },
-      { url: pu2[4] },
-    ],
-    날짜: date,
-    작성자: wri,
-    내용: contents,
-  });
 
   const responseBody = {
     version: "2.0",
@@ -92,7 +65,7 @@ apiRouter.post("/air_content_input", async (req, res) => {
       outputs: [
         {
           simpleText: {
-            text: "입력되었습니닷!",
+            //text: "입력되었습니닷!",
             text: info  
           },
         },
