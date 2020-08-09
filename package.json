@@ -1,0 +1,22 @@
+{
+  "name": "chat",
+  "version": "0.0.1",
+  "description": "chat",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/netlify-lambda serve src",
+    "build": "./node_modules/.bin/netlify-lambda build src"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "airtable": "^0.8.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-asyncify": "^1.0.1",
+    "morgan": "^1.10.0",
+    "netlify-cli": "^2.59.0",
+    "netlify-lambda": "^1.6.3",
+    "serverless-http": "^2.5.0"
+  }
+}
