@@ -1,5 +1,5 @@
 //TODO: Hide API KEYS.
-//
+//airtable 에서 record.getId를 살려야 함
 
 const express = require("express");
 const asyncify = require("express-asyncify");
@@ -85,10 +85,11 @@ apiRouter.post("/air_content_input", async (req, res) => {
   //    return;
   //  }
   //    console.log(record.getId()); 
-      var record_id = record.getId();
-      getRecordId.set_arr2(record_id);
-      console.log(getRecordId.get_arr2());
+  //    var record_id = record.getId();
+  //    getRecordId.set_arr2(record_id);
+  //    console.log(getRecordId.get_arr2());
   //});
+
 
   const responseBody = {
     version: "2.0",
