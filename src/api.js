@@ -108,7 +108,7 @@ apiRouter.post("/air_content_input", async (req, res) => {
 
 apiRouter.post("/air_pic_input", (req, res) => {
 
-  var buyer = JSON.stringify(req.body.action.detailParams.customer.origin); 
+  //var buyer = JSON.stringify(req.body.action.detailParams.customer.origin); 
   
   var k = getRecordId.get_arr2();
   console.log(k);
