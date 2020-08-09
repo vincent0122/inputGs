@@ -77,6 +77,7 @@ apiRouter.post("/air_content_input", (req, res) => {
   var wri = getName(wri);
   var wri = wri[0].name
 
+  setTimeout(function(){
    base("testing").create({
     날짜: date,
     거래처2: buyer,
@@ -92,6 +93,7 @@ apiRouter.post("/air_content_input", (req, res) => {
       getRecordId.set_id(record_id);
       console.log(getRecordId.get_id());
   });
+},3000);
 
 
   const responseBody = {
@@ -100,7 +102,7 @@ apiRouter.post("/air_content_input", (req, res) => {
       outputs: [
         {
           simpleText: {
-            text: "입력완료(사진첨부를 원하면 '사진첨부'를 크을릭)",
+            text: "입력완료(사진첨부를 원하면 '사진첨부'를 클릭하세요~)",
           },
         },
       ],
