@@ -78,17 +78,17 @@ apiRouter.post("/air_content_input", async (req, res) => {
     날짜: date,
     거래처2: buyer,
     작성자: wri,
-    내용: contents,
-  }, function(err, record) {
-    if (err) {
-      console.error(err);
-      return;
-    }
-      console.log(record.getId()); 
-      var record_id = record.getId();
-      getRecordId.set_arr2(record_id);
-      console.log(getRecordId.get_arr2());
-  });
+    내용: contents});
+  //}, function(err, record) {
+  //  if (err) {
+  //    console.error(err);
+  //    return;
+  //  }
+  //    console.log(record.getId()); 
+  //    var record_id = record.getId();
+  //    getRecordId.set_arr2(record_id);
+  //    console.log(getRecordId.get_arr2());
+  //});
 
   const responseBody = {
     version: "2.0",
