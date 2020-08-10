@@ -53,13 +53,17 @@ function setArray2(ids) {
     },
     set_id : function (_ids) {
       ids.push( _ids)   //왜 var로 선언을 하지 않지?
-  }
+  },
+   pass_id : function(){
+     var elvis = getRecordId.get_id();
+     return elvis
+   }
 };
 }
 
-
-
+if (getRecordId.get_id().length <1){
 const getRecordId = setArray2([]);
+};
 
 //클로저 함수 끝(for get record Id)
 
@@ -91,6 +95,7 @@ apiRouter.post("/air_content_input", (req, res) => {
       var record_id = record.getId();
       getRecordId.set_id(record_id);
       console.log(getRecordId.get_id());
+      
   });
 
 setTimeout(function(){
@@ -119,11 +124,7 @@ setTimeout(function(){
 apiRouter.post("/air_pic_input", (req, res) => {
 
 
-  var k = getRecordId.get_id();
-  
-  setTimeout(function(){
-    console.log(k);
-  },3000);
+  console.log(getRecordId.pass_id());  
 
   const responseBody = {
     version: "2.0",
@@ -131,7 +132,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
       outputs: [
         {
           simpleText: {
-            text: k,
+            text: "k",
           },
         },
       ],
