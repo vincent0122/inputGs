@@ -77,41 +77,22 @@ apiRouter.post("/air_content_input", (req, res) => {
   var wri = getName(wri);
   var wri = wri[0].name
 
-<<<<<<< HEAD
   base("testing").create({
-=======
-   base("testing").create({
->>>>>>> 7070095bb3491f662c8455abc0ea3d697c5278b9
     날짜: date,
     거래처2: buyer,
     작성자: wri,
     내용: contents
-<<<<<<< HEAD
   }), function(err, record) {
-=======
-  }, function(err, record) {
->>>>>>> 7070095bb3491f662c8455abc0ea3d697c5278b9
     if (err) {
       console.error(err);
       return;
     }
       console.log(record.getId()); 
       var record_id = record.getId();
-<<<<<<< HEAD
       getRecordId.set_arr2(record_id);
       console.log(getRecordId.get_arr2());
   };
   
-=======
-      getRecordId.set_id(record_id);
-      console.log(getRecordId.get_id());
-  });
-
-setTimeout(function(){
-  var k = getRecordId.get_id();
-  var kk = k[0];
-
->>>>>>> 7070095bb3491f662c8455abc0ea3d697c5278b9
   const responseBody = {
     version: "2.0",
     template: {
@@ -128,14 +109,8 @@ setTimeout(function(){
 
   setTimeout(function(){
   res.status(200).send(responseBody);
-<<<<<<< HEAD
   },1000);
 });
-=======
- 
-},1000);
-})
->>>>>>> 7070095bb3491f662c8455abc0ea3d697c5278b9
 
 apiRouter.post("/air_pic_input", (req, res) => {
 
