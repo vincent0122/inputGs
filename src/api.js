@@ -100,7 +100,8 @@ setTimeout(function(){
       outputs: [
         {
           simpleText: {
-            text: "입력완료(사진첨부를 원하면 '사진첨부'를 클릭하세요~)",
+            //text: "입력완료(사진첨부를 원하면 '사진첨부'를 클릭하세요~)",
+            text: record_id
           },
         },
       ],
@@ -109,7 +110,7 @@ setTimeout(function(){
 
   res.status(200).send(responseBody);
  
-},2000);
+},1000);
 })
 
 apiRouter.post("/air_pic_input", (req, res) => {
