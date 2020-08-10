@@ -89,8 +89,8 @@ apiRouter.post("/air_content_input", (req, res) => {
     }
       console.log(record.getId()); 
       var record_id = record.getId();
-      getRecordId.set_arr2(record_id);
-      console.log(getRecordId.get_arr2());
+      getRecordId.set_id(record_id);
+      console.log(getRecordId.get_id());
   };
   
   setTimeout(function(){
@@ -100,8 +100,8 @@ apiRouter.post("/air_content_input", (req, res) => {
       outputs: [
         {
           simpleText: {
-            //text: "입력완료(사진첨부를 원하면 '사진첨부'를 클릭하세요~)",
-            text: kk
+            text: "입력완료(사진첨부를 원하면 '사진첨부'를 클릭하세요~)",
+            //text: kk[0]
           },
         },
       ],
