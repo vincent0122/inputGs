@@ -95,6 +95,7 @@ apiRouter.post("/air_content_input", (req, res) => {
 
 setTimeout(function(){
   var k = getRecordId.get_id();
+  var kk = k[0];
 
   const responseBody = {
     version: "2.0",
@@ -103,7 +104,7 @@ setTimeout(function(){
         {
           simpleText: {
             //text: "입력완료(사진첨부를 원하면 '사진첨부'를 클릭하세요~)",
-            text: k
+            text: kk
           },
         },
       ],
