@@ -118,18 +118,16 @@ apiRouter.post("/air_pic_input", (req, res) => {
 
 
   var k = getRecordId.get_id();
-  
+  var k2 = k[0];
+ 
   setTimeout(function(){
-    console.log(k);
-  },3000);
-
   const responseBody = {
     version: "2.0",
     template: {
       outputs: [
         {
           simpleText: {
-            text: k,
+            text: k2,
           },
         },
       ],
@@ -137,6 +135,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
   };
   
   res.status(200).send(responseBody);
+},1000);
 });
 
 apiRouter.post("/checkId", function (req, res) {
