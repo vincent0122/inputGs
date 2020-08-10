@@ -82,7 +82,7 @@ apiRouter.post("/air_content_input", (req, res) => {
     거래처2: buyer,
     작성자: wri,
     내용: contents
-  }), function(err, record) {
+  }, function(err, record) {
     if (err) {
       console.error(err);
       return;
@@ -91,7 +91,7 @@ apiRouter.post("/air_content_input", (req, res) => {
       var record_id = record.getId();
       getRecordId.set_id(record_id);
       console.log(getRecordId.get_id());
-  };
+  });
   
   setTimeout(function(){
   const responseBody = {
@@ -111,6 +111,7 @@ apiRouter.post("/air_content_input", (req, res) => {
   
   res.status(200).send(responseBody);
   },1000);
+  
 });
 
 apiRouter.post("/air_pic_input", (req, res) => {
