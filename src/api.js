@@ -1,5 +1,8 @@
-//TODO: Hide API KEYS.
-//airtable 에서 record.getId를 살려야 함
+// TODO: Hide API KEYS.
+// airtable 에서 record.getId를 살려야 함 Done
+// setTimeout을 await async로 바꿔야 함
+// pic_input을 update 명령어로 id는 딸 수 있으니까
+// 메뉴에 form으로 입력하는 방법 추가
 
 const express = require("express");
 const asyncify = require("express-asyncify");
@@ -81,7 +84,7 @@ apiRouter.post("/air_content_input", (req, res) => {
   var wri = getName(wri);
   var wri = wri[0].name
 
-   base("testing").create({
+  base("testing").create({
     날짜: date,
     거래처2: buyer,
     작성자: wri,
@@ -97,42 +100,42 @@ apiRouter.post("/air_content_input", (req, res) => {
       console.log(getRecordId.get_id());
       
   });
-
-setTimeout(function(){
-  var k = getRecordId.get_id();
-  var kk = k[0];
-
+  
+  setTimeout(function(){
   const responseBody = {
     version: "2.0",
     template: {
       outputs: [
         {
           simpleText: {
-            //text: "입력완료(사진첨부를 원하면 '사진첨부'를 클릭하세요~)",
-            text: kk
+            text: "입력완료(사진첨부를 원하면 '사진첨부'를 클릭하세요~)",
+            //text: kk[0]
           },
         },
       ],
     },
   };
 
+  
   res.status(200).send(responseBody);
- 
-},1000);
-})
+  },1000);
+  
+});
 
 apiRouter.post("/air_pic_input", (req, res) => {
 
 
-  console.log(getRecordId.pass_id());  
-
+  var k = getRecordId.get_id();
+  var k2 = k[0];
+ 
+  setTimeout(function(){
   const responseBody = {
     version: "2.0",
     template: {
       outputs: [
         {
           simpleText: {
-            text: "k",
+            text: k2,
           },
         },
       ],
@@ -140,6 +143,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
   };
   
   res.status(200).send(responseBody);
+},1000);
 });
 
 apiRouter.post("/checkId", function (req, res) {
