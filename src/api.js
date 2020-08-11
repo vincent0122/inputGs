@@ -163,7 +163,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
     }
     console.log(record.get('Name'));
   });
-},500);
+},5000);
     
   setTimeout(function(){
     const responseBody = {
@@ -182,7 +182,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
   res.status(200).send(responseBody);
   //item.ini_arr();
   getRecordId.ini_id();
- },1000);
+ },100); //이걸 길게 하니까 한번 받고 끝나버리네. 없애면 입력이 안되고
 });
 
 apiRouter.post("/testing", (req, res) => {
