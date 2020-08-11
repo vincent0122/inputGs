@@ -174,7 +174,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
       outputs: [
         {
           simpleText: {
-            text: "done",
+            text: pic2[0],
           },
         },
       ],
