@@ -167,22 +167,38 @@ apiRouter.post("/air_pic_input", (req, res) => {
     
   setTimeout(function(){
     const responseBody = {
-    version: "2.0",
-    template: {
-      outputs: [
-        {
-          simpleText: {
-            text: pic2[0] + pic2[1],
+      version: "2.0",
+      template: {
+        outputs: [
+          {
+            "basicCard": {
+              "title": "AIRTABLE",
+              "description": "사진을 추가하시겠습니까?(사진만 가능해요)",
+              "thumbnail": {
+                "imageUrl": "http://www.bloter.net/wp-content/uploads/2017/09/5ffa7dfa1a11a7cf1db37be163197f76526ab886108275dccc9abb455a062e8b97cfcd3158ed6a517062375e7a6d954ffe97599175348a0d774ade7886d87ce07a1d5713fc684809e597b8288ce2e110-1.png"
+              },
+              "buttons": [
+                {
+                  "action": "block",
+                  "label": "추가하기",
+                  "blockId": "5f2f475ef8e71a0001de609b"
+                },
+                {
+                  "action":  "message",
+                  "label": "종료하기",
+                  "messageText": "첨부 없이 입력 완료되었습니다!"
+                }
+              ]
+            }
           },
-        },
-      ],
-    },
-  };
+        ],
+      },
+    };
   
   res.status(200).send(responseBody);
   //item.ini_arr();
   getRecordId.ini_id();
- },10000); //이걸 길게 하니까 한번 받고 끝나버리네. 없애면 입력이 안되고
+ },1000); //이걸 길게 하니까 한번 받고 끝나버리네. 없애면 입력이 안되고. 이게 빨리 끝나야. 한턴을 종료시키고 다음을 돈다고..이게 늦으면 한번에서 더 못돌아
 });
 
 apiRouter.post("/testing", async(req, res) => {
