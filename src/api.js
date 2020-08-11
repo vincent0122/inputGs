@@ -151,6 +151,19 @@ apiRouter.post("/air_pic_input", (req, res) => {
       data.url = pic2[i];
       picList.push(data);
    }; 
+
+   setTimeout(function(){
+   base('testing').update(block_Id, {
+    
+    "Attachments": picList
+  }, function(err, record) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log(record.get('Name'));
+  });
+},500);
     
   const responseBody = {
     version: "2.0",
@@ -158,7 +171,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
       outputs: [
         {
           simpleText: {
-            text: x,
+            text: pic[1],
           },
         },
       ],
@@ -168,19 +181,6 @@ apiRouter.post("/air_pic_input", (req, res) => {
   res.status(200).send(responseBody);
   //item.ini_arr();
   getRecordId.ini_id();
-
-  setTimeout(function(){
-    base('testing').update(block_Id, {
-     
-     "Attachments": picList
-   }, function(err, record) {
-     if (err) {
-       console.error(err);
-       return;
-     }
-     console.log(record.get('Name'));
-   });
- },500);
 });
 
 apiRouter.post("/testing", (req, res) => {
@@ -200,7 +200,7 @@ apiRouter.post("/testing", (req, res) => {
    console.log(picList);
 
    setTimeout(function(){
-   base('testing').update("recXvxewvSRxCPBI7", {
+   base('testing').update("rec70W0SxEkRMlWZz", {
     
     "Attachments": picList
   }, function(err, record) {
