@@ -2,7 +2,7 @@
 // setTimeout을 await async로 바꿔야 함 
 // 메뉴에 form으로 입력하는 방법 추가 완료
 // 카카오톡 사진 파일 자동 크기 줄이기 안해도 돼
-// 동의어를 입력해도 입력한값이 그대로 들어가네? 해결
+// 동의어를 입력해도 입력한값이 그대로 들어가네? 해
 
 const express = require("express");
 const asyncify = require("express-asyncify");
