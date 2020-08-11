@@ -182,7 +182,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
   res.status(200).send(responseBody);
   //item.ini_arr();
   getRecordId.ini_id();
- },5000); //이걸 길게 하니까 한번 받고 끝나버리네. 없애면 입력이 안되고
+ },10000); //이걸 길게 하니까 한번 받고 끝나버리네. 없애면 입력이 안되고
 });
 
 apiRouter.post("/testing", async(req, res) => {
