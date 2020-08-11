@@ -16,7 +16,7 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 
 const Airtable = require("airtable");
-const base = new Airtable({apiKey: 'keynCOHYwnnoQZDeB'}).base('apptSTO7G7lbYD7gu');
+const base = new Airtable({apiKey: 'keynCOHYwnnoQZDeB'}).base('appmdFjy715yHPmNw');
 const getName = require('./getName.js')
 
 app.use(logger("dev", {}));
@@ -83,7 +83,7 @@ apiRouter.post("/air_content_input", (req, res) => {
   var wri = getName(wri);
   var wri = wri[0].name
 
-  base("testing").create({
+  base("dataBase").create({
     날짜: date,
     거래처2: buyer,
     작성자: wri,
@@ -154,7 +154,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
    }; 
 
    setTimeout(function(){
-   base('testing').update(block_Id, {
+   base('dataBase').update(block_Id, {
     
     "Attachments": picList
   }, function(err, record) {
