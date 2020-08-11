@@ -142,14 +142,61 @@ apiRouter.post("/air_pic_input", (req, res) => {
    var pic = JSON.stringify(req.body.action.detailParams.pic.origin);
    item.set_arr(pic);
    var pic2 = item.get_arr();
-   var pic3 = pic2[0];
+   var pic2 = pic2[0];
+   var pic2 = pic2.replace(/\"/g, "");
 
    setTimeout(function(){
    base('testing').update(block_Id, {
     
     "Attachments": [
       {
-        url : "\""+pic3+"\""
+        url : pic2
+      }
+    ]
+  }, function(err, record) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log(record.get('Name'));
+  });
+},500);
+  
+
+  setTimeout(function(){
+  const responseBody = {
+    version: "2.0",
+    template: {
+      outputs: [
+        {
+          simpleText: {
+            text: "done",
+          },
+        },
+      ],
+    },
+  };
+  
+  res.status(200).send(responseBody);
+  item.ini_arr();
+  getRecordId.ini_id();
+},1000);
+});
+
+apiRouter.post("/testing", (req, res) => {
+
+   var pic = JSON.stringify(req.body.action.detailParams.pic.origin);
+   item.set_arr(pic);
+   var pic2 = item.get_arr();
+   var pic2 = pic2[0];
+   var pic2 = pic2.replace(/\"/g, "");
+
+   setTimeout(function(){
+   base('testing').update("recXvxewvSRxCPBI7", {
+    
+    "Attachments": [
+      {
+        url : pic2
       }
     ]
   }, function(err, record) {
