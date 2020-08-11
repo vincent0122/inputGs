@@ -174,7 +174,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
             "basicCard": {
               "title": "AIRTABLE",
               //"description": "사진을 추가하시겠습니까?(사진만 가능해요)",
-              "description": x,
+              "description": x + pic2[0],
               "thumbnail": {
                 "imageUrl": "http://www.bloter.net/wp-content/uploads/2017/09/5ffa7dfa1a11a7cf1db37be163197f76526ab886108275dccc9abb455a062e8b97cfcd3158ed6a517062375e7a6d954ffe97599175348a0d774ade7886d87ce07a1d5713fc684809e597b8288ce2e110-1.png"
               },
