@@ -163,7 +163,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
     }
     console.log(record.get('Name'));
   });
-},5000);
+},500); // 이렇게 크면. req가 실행되니까 끝나버림
     
   setTimeout(function(){
     const responseBody = {
@@ -232,7 +232,9 @@ apiRouter.post("/testing", (req, res) => {
   res.status(200).send(responseBody);
   item.ini_arr();
   getRecordId.ini_id();
+  
 },1000);
+console.log("짱");
 });
 
 apiRouter.post("/checkId", function (req, res) {
