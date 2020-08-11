@@ -110,15 +110,6 @@ apiRouter.post("/air_content_input", (req, res) => {
             "thumbnail": {
               "imageUrl": "http://www.bloter.net/wp-content/uploads/2017/09/5ffa7dfa1a11a7cf1db37be163197f76526ab886108275dccc9abb455a062e8b97cfcd3158ed6a517062375e7a6d954ffe97599175348a0d774ade7886d87ce07a1d5713fc684809e597b8288ce2e110-1.png"
             },
-         /*    "profile": {
-              "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4BJ9LU4Ikr_EvZLmijfcjzQKMRCJ2bO3A8SVKNuQ78zu2KOqM",
-              "nickname": "보물상자"
-            },
-            "social": {
-              "like": 1238,
-              "comment": 8,
-              "share": 780
-            }, */
             "buttons": [
               {
                 "action": "block",
@@ -156,7 +147,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
     
     "Attachments": [
       {
-        "url" : pic2[0] 
+        "url" : "http://dn-m.talk.kakao.com/talkm/bl3MvNjfAhC/w0bTKST6J6okkFITpxucO0/i_zdrzoekwlk7.jpg" 
       }
     ]
   }, function(err, record) {
@@ -182,6 +173,8 @@ apiRouter.post("/air_pic_input", (req, res) => {
   };
   
   res.status(200).send(responseBody);
+  item.ini_arr();
+  getRecordId.ini_id();
 },1000);
 });
 
