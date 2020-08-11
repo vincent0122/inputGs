@@ -57,9 +57,8 @@ function setArray2(ids) {
     set_id : function (_ids) {
       ids.push( _ids)   //왜 var로 선언을 하지 않지?
   },
-   pass_id : function(){
-     var elvis = getRecordId.get_id();
-     return elvis
+   ini_id : function(){
+     ids = [];
    }
 };
 }
@@ -96,7 +95,6 @@ apiRouter.post("/air_content_input", (req, res) => {
       console.log(record.getId()); 
       var record_id = record.getId();
       getRecordId.set_id(record_id);
-      console.log(getRecordId.get_id());
       
   });
   
@@ -125,7 +123,7 @@ apiRouter.post("/air_content_input", (req, res) => {
               {
                 "action": "block",
                 "label": "추가하기",
-                "blockId": "짜잔! 우리가 찾던 보물입니다"
+                "blockId": "5f2f475ef8e71a0001de609b"
               },
               {
                 "action":  "message",
@@ -145,36 +143,50 @@ apiRouter.post("/air_content_input", (req, res) => {
   
 });
 
-apiRouter.post("/air_picOrNot", (req, res) => {             //사진첨부 
-
-
-  var k = getRecordId.get_id();
-  var k2 = k[0];
- 
-  setTimeout(function(){
-  const responseBody = {
-    version: "2.0",
-    template: {
-      outputs: [
-        {
-          simpleText: {
-            text: k2,
-          },
-        },
-      ],
-    },
-  };
-  
-  res.status(200).send(responseBody);
-},1000);
-});
-
 apiRouter.post("/air_pic_input", (req, res) => {
 
-  var k2 = JSON.stringify(req.body);
-  //var k = getRecordId.get_id();
-  //var k2 = k[0];
- 
+  var block_Id = getRecordId.get_id();
+  var block_Id = block_Id[0];
+  
+  var pic = JSON.stringify(req.body.action.detailParams.file.origin);
+  item.set_arr(pic);
+  var pic2 = item.get_arr();
+
+  base('testing').update("reckwTTfPG0C8euQ7", {
+    "Attachments": [
+      {
+        "id": block_Id,
+        "url": "https://dl.airtable.com/.attachments/c152b888eef0328f7b69484961e3c415/2e16c9bb/KakaoTalk_20200527_084727449.png",
+        "filename": "KakaoTalk_20200527_084727449.png",
+        "size": 47490,
+        "type": "image/png",
+        "thumbnails": {
+          "small": {
+            "url": "https://dl.airtable.com/.attachmentThumbnails/e5e7615339d3940bd8cac628fb5300bb/e19b29a4",
+            "width": 37,
+            "height": 36
+          },
+          "large": {
+            "url": "https://dl.airtable.com/.attachmentThumbnails/ed150af178932cec34548ec17178669d/49b2eab2",
+            "width": 529,
+            "height": 512
+          },
+          "full": {
+            "url": "https://dl.airtable.com/.attachmentThumbnails/e67e7de8c0e7d737a89a86911152f817/4ccf5ec7",
+            "width": 3000,
+            "height": 3000
+          }
+        }
+      }
+    ],
+  }, function(err, record) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log(record.get('Name'));
+  });
+
   setTimeout(function(){
   const responseBody = {
     version: "2.0",
