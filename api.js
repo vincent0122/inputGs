@@ -148,15 +148,27 @@ apiRouter.post("/air_pic_input", (req, res) => {
   var block_Id = getRecordId.get_id();
   var block_Id = block_Id[0];
   
-   var pic = JSON.stringify(req.body.action.detailParams.pic.origin);
-   item.set_arr(pic);
-   var pic2 = item.get_arr();
+  var pic = JSON.stringify(req.body.action.detailParams.pic.origin);
+  item.set_arr(pic);
+  var pic2 = item.get_arr();
 
   base('testing').update(block_Id, {
     
     "Attachments": [
       {
-        url : pic2[0] 
+        "url" : pic2[0] 
+      },
+      {
+        "url" : pic2[1] 
+      },
+      {
+        "url" : pic2[2] 
+      },
+      {
+        "url" : pic2[3] 
+      },
+      {
+        "url" : pic2[4] 
       }
     ]
   }, function(err, record) {
