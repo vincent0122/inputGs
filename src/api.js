@@ -136,6 +136,7 @@ apiRouter.post("/air_content_input", (req, res) => {
 
 apiRouter.post("/air_pic_input", (req, res) => {
 
+  var x = JSON.stringify(req.body);
   var block_Id = getRecordId.get_id();
   var block_Id = block_Id[0];
   
@@ -172,7 +173,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
       outputs: [
         {
           simpleText: {
-            text: "done",
+            text: x,
           },
         },
       ],
