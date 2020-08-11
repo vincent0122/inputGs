@@ -3,6 +3,7 @@
 // setTimeout을 await async로 바꿔야 함
 // pic_input을 update 명령어로 id는 딸 수 있으니까
 // 메뉴에 form으로 입력하는 방법 추가
+// pic_Input을 다시 호출하면 안되는 이유는?
 
 const express = require("express");
 const asyncify = require("express-asyncify");
@@ -282,7 +283,7 @@ apiRouter.post("/checkId", function (req, res) {
       outputs: [
         {
           simpleText: {
-            text: block_Id,
+            text: block_Id[0],
           },
         },
       ],
