@@ -149,7 +149,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
     
     "Attachments": [
       {
-        url : pic3
+        url : "\""+pic3+"\""
       }
     ]
   }, function(err, record) {
