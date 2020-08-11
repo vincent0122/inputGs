@@ -107,8 +107,8 @@ apiRouter.post("/air_content_input", (req, res) => {
       outputs: [
         {
           "basicCard": {
-            "title": "AIRTABLE",
-            "description": "사진을 추가하시겠습니까?(사진만 가능해요)",
+            "title": "AIRTABLE 사진추가 하실래요?",
+            //"description": "사진을 추가하시겠습니까?(사진만 가능해요)",
             "thumbnail": {
               "imageUrl": "https://ifh.cc/g/hltQMO.jpg"
             },
