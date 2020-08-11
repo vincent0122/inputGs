@@ -15,7 +15,8 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 
 const Airtable = require("airtable");
-const base = new Airtable({apiKey: 'keynCOHYwnnoQZDeB'}).base('appmdFjy715yHPmNw');
+//const base = new Airtable({apiKey: 'keynCOHYwnnoQZDeB'}).base('appmdFjy715yHPmNw');
+const base = new Airtable({apiKey: process.env.API_KEY}).base('appmdFjy715yHPmNw');
 const getName = require('./getName.js')
 
 app.use(logger("dev", {}));
