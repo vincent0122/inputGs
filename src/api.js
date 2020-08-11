@@ -198,7 +198,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
   
   res.status(200).send(responseBody);
   //item.ini_arr();
-  getRecordId.ini_id();
+  //getRecordId.ini_id();
  },1000); //이걸 길게 하니까 한번 받고 끝나버리네. 없애면 입력이 안되고. 이게 빨리 끝나야. 한턴을 종료시키고 다음을 돈다고..이게 늦으면 한번에서 더 못돌아
 });
 
