@@ -140,19 +140,21 @@ apiRouter.post("/air_pic_input", (req, res) => {
   var block_Id = block_Id[0];
   
    var pic = JSON.stringify(req.body.action.detailParams.pic.origin);
+   var pic = pic.replace(/\"/g, "");
+   var picList = new Array();
    item.set_arr(pic);
    var pic2 = item.get_arr();
-   var pic2 = pic2[0];
-   var pic2 = pic2.replace(/\"/g, "");
+
+   for(var i=0; i<pic2.length; i++){
+      var data = new Object();
+      data.url = pic2[i];
+      picList.push(data);
+   }; 
 
    setTimeout(function(){
    base('testing').update(block_Id, {
     
-    "Attachments": [
-      {
-        url : pic2
-      }
-    ]
+    "Attachments": picList
   }, function(err, record) {
     if (err) {
       console.error(err);
@@ -186,19 +188,23 @@ apiRouter.post("/air_pic_input", (req, res) => {
 apiRouter.post("/testing", (req, res) => {
 
    var pic = JSON.stringify(req.body.action.detailParams.pic.origin);
+   var pic = pic.replace(/\"/g, "");
+   var picList = new Array();
    item.set_arr(pic);
    var pic2 = item.get_arr();
-   var pic2 = pic2[0];
-   var pic2 = pic2.replace(/\"/g, "");
+
+   for(var i=0; i<pic2.length; i++){
+      var data = new Object();
+      data.url = pic2[i];
+      picList.push(data);
+   }; 
+
+   console.log(picList);
 
    setTimeout(function(){
    base('testing').update("recXvxewvSRxCPBI7", {
     
-    "Attachments": [
-      {
-        url : pic2
-      }
-    ]
+    "Attachments": picList
   }, function(err, record) {
     if (err) {
       console.error(err);
@@ -216,7 +222,7 @@ apiRouter.post("/testing", (req, res) => {
       outputs: [
         {
           simpleText: {
-            text: pic2[0],
+            text: "d",
           },
         },
       ],
