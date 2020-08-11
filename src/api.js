@@ -165,7 +165,8 @@ apiRouter.post("/air_pic_input", (req, res) => {
   });
 },500);
     
-  const responseBody = {
+  setTimeout(function(){
+    const responseBody = {
     version: "2.0",
     template: {
       outputs: [
@@ -181,6 +182,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
   res.status(200).send(responseBody);
   //item.ini_arr();
   getRecordId.ini_id();
+ },100);
 });
 
 apiRouter.post("/testing", (req, res) => {
