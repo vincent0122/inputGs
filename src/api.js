@@ -49,7 +49,7 @@ function setArray(arr) {
 const item = setArray([]);
 //클로저 함수 끝
 
-//클로저 함수 시작(for get record Id)
+//클로저 함수 시작(for get record Id) **변수로 바꿔야 함**
 function setArray2(ids) {
   return {
     get_id : function () {
@@ -181,8 +181,8 @@ apiRouter.post("/air_pic_input", (req, res) => {
               "buttons": [
                 {
                   "action": "block",
-                  "label": "정보확인",
-                  "blockId": "5f2f4822d7911e0001c12dbd"
+                  "label": "추가하기(from pic)",
+                  "blockId": "5f2f475ef8e71a0001de609b"
                 },
                 {
                   "action":  "message",
