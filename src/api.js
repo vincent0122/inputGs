@@ -142,13 +142,14 @@ apiRouter.post("/air_pic_input", (req, res) => {
    var pic = JSON.stringify(req.body.action.detailParams.pic.origin);
    item.set_arr(pic);
    var pic2 = item.get_arr();
+   var pic3 = pic2[0];
 
    setTimeout(function(){
    base('testing').update(block_Id, {
     
     "Attachments": [
       {
-        url : pic2[0]
+        url : pic3
       }
     ]
   }, function(err, record) {
