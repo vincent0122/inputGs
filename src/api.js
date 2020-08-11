@@ -15,7 +15,6 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 
 const Airtable = require("airtable");
-//const base = new Airtable({apiKey: 'keynCOHYwnnoQZDeB'}).base('appmdFjy715yHPmNw');
 const base = new Airtable({apiKey: process.env.API_KEY}).base('appmdFjy715yHPmNw');
 const getName = require('./getName.js')
 
@@ -56,11 +55,8 @@ function setArray2(ids) {
       return ids;
     },
     set_id : function (_ids) {
-      ids.push( _ids)   //왜 var로 선언을 하지 않지?
+      ids =  _ids;   //왜 var로 선언을 하지 않지?
   },
-   ini_id : function(){
-     ids = [];
-   }
 };
 }
 
@@ -109,7 +105,6 @@ apiRouter.post("/air_content_input", (req, res) => {
         {
           "basicCard": {
             "title": "AIRTABLE 사진추가 하실래요?",
-            //"description": "사진을 추가하시겠습니까?(사진만 가능해요)",
             "thumbnail": {
               "imageUrl": "https://ifh.cc/g/hltQMO.jpg"
             },
@@ -141,7 +136,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
 
   var x = JSON.stringify(req.body);
   var block_Id = getRecordId.get_id();
-  var block_Id = block_Id[0];
+  //var block_Id = block_Id[0];
   
    var pic = JSON.stringify(req.body.action.detailParams.pic.origin);
    var pic = pic.replace(/\"/g, "");
