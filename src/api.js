@@ -120,7 +120,7 @@ apiRouter.post("/air_content_input", (req, res) => {
               {
                 "action":  "message",
                 "label": "종료하기",
-                "messageText": "첨부 없이 입력 완료되었습니다!"
+                "messageText": "종료"
               }
             ]
           }
@@ -187,7 +187,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
                 {
                   "action":  "message",
                   "label": "종료하기",
-                  "messageText": "첨부 없이 입력 완료되었습니다!"
+                  "messageText": "종료"
                 }
               ]
             }
