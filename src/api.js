@@ -180,7 +180,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
   };
   
   res.status(200).send(responseBody);
-  item.ini_arr();
+  //item.ini_arr();
   getRecordId.ini_id();
 },1000);
 });
