@@ -148,37 +148,29 @@ apiRouter.post("/air_pic_input", (req, res) => {
   var block_Id = getRecordId.get_id();
   var block_Id = block_Id[0];
   
-  var pic = JSON.stringify(req.body.action.detailParams.file.origin);
+  var pic = JSON.stringify(req.body.action.detailParams.pic.origin);
   item.set_arr(pic);
   var pic2 = item.get_arr();
 
-  base('testing').update("reckwTTfPG0C8euQ7", {
+  base('testing').update(block_Id, {
+    
     "Attachments": [
       {
-        "id": block_Id,
-        "url": "https://dl.airtable.com/.attachments/c152b888eef0328f7b69484961e3c415/2e16c9bb/KakaoTalk_20200527_084727449.png",
-        "filename": "KakaoTalk_20200527_084727449.png",
-        "size": 47490,
-        "type": "image/png",
-        "thumbnails": {
-          "small": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/e5e7615339d3940bd8cac628fb5300bb/e19b29a4",
-            "width": 37,
-            "height": 36
-          },
-          "large": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/ed150af178932cec34548ec17178669d/49b2eab2",
-            "width": 529,
-            "height": 512
-          },
-          "full": {
-            "url": "https://dl.airtable.com/.attachmentThumbnails/e67e7de8c0e7d737a89a86911152f817/4ccf5ec7",
-            "width": 3000,
-            "height": 3000
-          }
-        }
+        "url" : pic2[0] 
+      },
+      {
+        "url" : pic2[1] 
+      },
+      {
+        "url" : pic2[2] 
+      },
+      {
+        "url" : pic2[3] 
+      },
+      {
+        "url" : pic2[4] 
       }
-    ],
+    ]
   }, function(err, record) {
     if (err) {
       console.error(err);
@@ -194,7 +186,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
       outputs: [
         {
           simpleText: {
-            text: k2,
+            text: pic2,
           },
         },
       ],

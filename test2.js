@@ -1,37 +1,19 @@
-
-
-function setArray2(arr2) {
-    return {
-      get_arr2: function () {
-        return arr2;
-      },
-      set_arr2: function (_id) {
-        arr2.push(_id);
-    }
+function setArray(arr) {
+  return {
+    get_arr: function () {
+      return arr;
+    },
+    set_arr: function (_url) {
+      arr.push(_url);
+    },
+    ini_arr: function () {
+      arr = [];
+    },
   };
-  }
+}
 
-  const getRecordId = setArray2([]);
-  
- function sum() {
-     getRecordId.set_arr2("123");
- };
+const item = setArray([]);
 
- 
-
- function read(){
-     var k = getRecordId.get_arr2();
-     console.log(k);
- };
-
- sum();
- sum();
- sum();
-
- setArray2([1,2]);
- sum();
- read();
- console.log(setArray2);
- //console.log(k);
-
- //console.log(getRecordId.get_arr2());
+  item.set_arr("123");
+  var pic = item.get_arr();
+  console.log(pic[1]);
