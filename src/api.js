@@ -182,11 +182,12 @@ apiRouter.post("/air_pic_input", (req, res) => {
   res.status(200).send(responseBody);
   //item.ini_arr();
   getRecordId.ini_id();
- },100); //이걸 길게 하니까 한번 받고 끝나버리네. 없애면 입력이 안되고
+ },5000); //이걸 길게 하니까 한번 받고 끝나버리네. 없애면 입력이 안되고
 });
 
-apiRouter.post("/testing", (req, res) => {
+apiRouter.post("/testing", async(req, res) => {
 
+  function setVar(){
    var pic = JSON.stringify(req.body.action.detailParams.pic.origin);
    var pic = pic.replace(/\"/g, "");
    var picList = new Array();
@@ -198,10 +199,9 @@ apiRouter.post("/testing", (req, res) => {
       data.url = pic2[i];
       picList.push(data);
    }; 
-
-   console.log(picList);
-
-   setTimeout(function(){
+  };
+   
+  function update(){
    base('testing').update("rec70W0SxEkRMlWZz", {
     
     "Attachments": picList
@@ -212,11 +212,12 @@ apiRouter.post("/testing", (req, res) => {
     }
     console.log(record.get('Name'));
   });
-},500);
-  
 
-  setTimeout(function(){
-  const responseBody = {
+  
+};
+
+  function finish(){  
+const responseBody = {
     version: "2.0",
     template: {
       outputs: [
@@ -230,11 +231,17 @@ apiRouter.post("/testing", (req, res) => {
   };
   
   res.status(200).send(responseBody);
-  item.ini_arr();
-  getRecordId.ini_id();
-  
-},1000);
-console.log("짱");
+}
+
+ async function foo(){
+   await setVar()
+   await update()
+   await finish()
+ }
+
+ foo(); 
+//  item.ini_arr();
+//  getRecordId.ini_id();
 });
 
 apiRouter.post("/checkId", function (req, res) {
