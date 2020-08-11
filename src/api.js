@@ -107,10 +107,34 @@ apiRouter.post("/air_content_input", (req, res) => {
     template: {
       outputs: [
         {
-          simpleText: {
-            text: "입력완료(사진첨부를 원하면 '사진첨부'를 클릭하세요~)",
-            //text: kk[0]
-          },
+          "basicCard": {
+            "title": "AIRTABLE",
+            "description": "사진을 추가하시겠습니까?(사진만 가능해요)",
+            "thumbnail": {
+              "imageUrl": "http://www.bloter.net/wp-content/uploads/2017/09/5ffa7dfa1a11a7cf1db37be163197f76526ab886108275dccc9abb455a062e8b97cfcd3158ed6a517062375e7a6d954ffe97599175348a0d774ade7886d87ce07a1d5713fc684809e597b8288ce2e110-1.png"
+            },
+         /*    "profile": {
+              "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4BJ9LU4Ikr_EvZLmijfcjzQKMRCJ2bO3A8SVKNuQ78zu2KOqM",
+              "nickname": "보물상자"
+            },
+            "social": {
+              "like": 1238,
+              "comment": 8,
+              "share": 780
+            }, */
+            "buttons": [
+              {
+                "action": "block",
+                "label": "추가하기",
+                "blockId": "짜잔! 우리가 찾던 보물입니다"
+              },
+              {
+                "action":  "message",
+                "label": "종료하기",
+                "messageText": "첨부 없이 입력 완료되었습니다!"
+              }
+            ]
+          }
         },
       ],
     },
@@ -122,11 +146,35 @@ apiRouter.post("/air_content_input", (req, res) => {
   
 });
 
-apiRouter.post("/air_pic_input", (req, res) => {
+apiRouter.post("/air_picOrNot", (req, res) => {             //사진첨부 
 
 
   var k = getRecordId.get_id();
   var k2 = k[0];
+ 
+  setTimeout(function(){
+  const responseBody = {
+    version: "2.0",
+    template: {
+      outputs: [
+        {
+          simpleText: {
+            text: k2,
+          },
+        },
+      ],
+    },
+  };
+  
+  res.status(200).send(responseBody);
+},1000);
+});
+
+apiRouter.post("/air_pic_input", (req, res) => {
+
+  var k2 = JSON.stringify(req.body);
+  //var k = getRecordId.get_id();
+  //var k2 = k[0];
  
   setTimeout(function(){
   const responseBody = {
