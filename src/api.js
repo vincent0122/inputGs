@@ -64,9 +64,8 @@ function setArray2(ids) {
 };
 }
 
-if (getRecordId.get_id().length <1){
+
 const getRecordId = setArray2([]);
-};
 
 //클로저 함수 끝(for get record Id)
 
