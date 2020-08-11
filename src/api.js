@@ -143,11 +143,12 @@ apiRouter.post("/air_pic_input", (req, res) => {
    item.set_arr(pic);
    var pic2 = item.get_arr();
 
-  base('testing').update(block_Id, {
+   setTimeout(function(){
+   base('testing').update(block_Id, {
     
     "Attachments": [
       {
-        "url" : "http://dn-m.talk.kakao.com/talkm/bl3MvNjfAhC/w0bTKST6J6okkFITpxucO0/i_zdrzoekwlk7.jpg" 
+        url : pic2[0]
       }
     ]
   }, function(err, record) {
@@ -157,6 +158,8 @@ apiRouter.post("/air_pic_input", (req, res) => {
     }
     console.log(record.get('Name'));
   });
+},500);
+  
 
   setTimeout(function(){
   const responseBody = {
