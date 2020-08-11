@@ -71,10 +71,10 @@ const getRecordId = setArray2([]);
 
 apiRouter.post("/air_content_input", (req, res) => {
   
-  var buyer = JSON.stringify(req.body.action.detailParams.customer.origin); 
+  var buyer = JSON.stringify(req.body.action.detailParams.customer.value); 
   var buyer = buyer.replace(/\"/g, "");
   
-  var info = JSON.stringify(req.body);
+  //var info = JSON.stringify(req.body);
   var content = JSON.stringify(req.body.action.detailParams.contents.origin);  
   var contents = content.replace(/\"/g, "");
 
@@ -87,8 +87,8 @@ apiRouter.post("/air_content_input", (req, res) => {
     날짜: date,
     거래처: buyer,
     작성자: wri,
-    //내용: contents
-    내용: info
+    내용: contents
+    
   }, function(err, record) {
     if (err) {
       console.error(err);
