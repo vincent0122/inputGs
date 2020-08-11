@@ -1,9 +1,8 @@
 // TODO: Hide API KEYS.
-// airtable 에서 record.getId를 살려야 함 Done
 // setTimeout을 await async로 바꿔야 함
-// pic_input을 update 명령어로 id는 딸 수 있으니까
 // 메뉴에 form으로 입력하는 방법 추가
-// pic_Input을 다시 호출하면 안되는 이유는?
+// 카카오톡 사진 파일 자동 크기 줄이기
+// 동의어를 입력해도 입력한값이 그대로 들어가네?
 
 const express = require("express");
 const asyncify = require("express-asyncify");
@@ -75,6 +74,7 @@ apiRouter.post("/air_content_input", (req, res) => {
   var buyer = JSON.stringify(req.body.action.detailParams.customer.origin); 
   var buyer = buyer.replace(/\"/g, "");
   
+  var info = JSON.stringify(req.body);
   var content = JSON.stringify(req.body.action.detailParams.contents.origin);  
   var contents = content.replace(/\"/g, "");
 
@@ -87,7 +87,8 @@ apiRouter.post("/air_content_input", (req, res) => {
     날짜: date,
     거래처: buyer,
     작성자: wri,
-    내용: contents
+    //내용: contents
+    내용: info
   }, function(err, record) {
     if (err) {
       console.error(err);
