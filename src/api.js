@@ -85,7 +85,7 @@ apiRouter.post("/air_content_input", (req, res) => {
 
   base("dataBase").create({
     날짜: date,
-    거래처2: buyer,
+    거래처: buyer,
     작성자: wri,
     내용: contents
   }, function(err, record) {
