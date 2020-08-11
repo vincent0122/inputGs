@@ -151,19 +151,6 @@ apiRouter.post("/air_pic_input", (req, res) => {
       data.url = pic2[i];
       picList.push(data);
    }; 
-
-   setTimeout(function(){
-   base('testing').update(block_Id, {
-    
-    "Attachments": picList
-  }, function(err, record) {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    console.log(record.get('Name'));
-  });
-},500);
     
   const responseBody = {
     version: "2.0",
@@ -181,6 +168,19 @@ apiRouter.post("/air_pic_input", (req, res) => {
   res.status(200).send(responseBody);
   //item.ini_arr();
   getRecordId.ini_id();
+
+  setTimeout(function(){
+    base('testing').update(block_Id, {
+     
+     "Attachments": picList
+   }, function(err, record) {
+     if (err) {
+       console.error(err);
+       return;
+     }
+     console.log(record.get('Name'));
+   });
+ },500);
 });
 
 apiRouter.post("/testing", (req, res) => {
