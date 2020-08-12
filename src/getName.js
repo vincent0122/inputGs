@@ -3,7 +3,7 @@ const getName = (wri) => data.filter(el=> el.wri === wri ) //getName[0].name 으
 //user Id changed too after changing bot
 const data = [
   {
-    "wri": "2c8017c334109ed356f928ecf6ba3ef80683e3634ca15ee80f7fb14c44765c4343",
+    "wri": "2c8017c334109ed356f928ecf6ba3ef80683e3634ca15ee80f7fb14c44765c4343", //done
     "name": "임진석"
   },
   {
@@ -31,7 +31,7 @@ const data = [
     "name": "추승혜"
   },
   {
-    "wri": "37f5153c8f36e0fe585605f71d2cf07ab609d58d2ad8b0e3d458b2f50b3bdb6778",
+    "wri": "37a3115a6aabf9b5dcbc31a0837be100e909d58d2ad8b0e3d458b2f50b3bdb6778", //done
     "name": "심동현"
   },
   {
