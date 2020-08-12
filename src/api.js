@@ -37,22 +37,25 @@ function setArray(arr) {
       return arr;
     },
     set_arr: function (_url) {
-      arr = _url;
-    }
+      arr.push(_url);
+    },
+    ini_arr: function () {
+      arr = [];
+    },
   };
 }
 
 const item = setArray([]);
 //클로저 함수 끝
 
-//클로저 함수 시작(for get record Id) 
+//클로저 함수 시작(for get record Id) **변수로 바꿔야 함**
 function setArray2(ids) {
   return {
     get_id : function () {
       return ids;
     },
     set_id : function (_ids) {
-      ids =  _ids;   
+      ids =  _ids;   //왜 var로 선언을 하지 않지?
   },
 };
 }
@@ -63,7 +66,7 @@ const getRecordId = setArray2([]);
 //클로저 함수 끝(for get record Id)
 
 
-apiRouter.post("/air_content_input", async(req, res) => {
+apiRouter.post("/air_content_input", (req, res) => {
   
   var buyer = JSON.stringify(req.body.action.detailParams.customer.value); 
   var buyer = buyer.replace(/\"/g, "");
@@ -132,21 +135,25 @@ apiRouter.post("/air_content_input", async(req, res) => {
 apiRouter.post("/air_pic_input", (req, res) => {
 
   var x = JSON.stringify(req.body);
-  var block_Id = "recoxT98PMVBSQZVb";
-  //var block_Id = getRecordId.get_id();
+  var block_Id = getRecordId.get_id();
   //var block_Id = block_Id[0];
   
    var pic = JSON.stringify(req.body.action.detailParams.pic.origin);
    var pic = pic.replace(/\"/g, "");
+   var picList = new Array();
+   item.set_arr(pic);
+   var pic2 = item.get_arr();
+
+   for(var i=0; i<pic2.length; i++){
+      var data = new Object();
+      data.url = pic2[i];
+      picList.push(data);
+   }; 
 
    setTimeout(function(){
    base('dataBase').update(block_Id, {
     
-    "Attachments": [
-      {
-        "url" : pic
-      }
-    ]
+    "Attachments": picList
   }, function(err, record) {
     if (err) {
       console.error(err);
