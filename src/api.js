@@ -97,6 +97,7 @@ apiRouter.post("/air_content_input", (req, res) => {
       
   });
   
+  setTimeout(function(){
   const responseBody = {
     version: "2.0",
     template: {
@@ -127,6 +128,8 @@ apiRouter.post("/air_content_input", (req, res) => {
 
   
   res.status(200).send(responseBody);
+  },500);
+  
 });
 
 apiRouter.post("/air_pic_input", (req, res) => {
