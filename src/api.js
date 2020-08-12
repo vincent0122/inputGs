@@ -208,8 +208,9 @@ apiRouter.post("/checkId", (req, res) => {
           {
             simpleText: {
               text: x,  
-          },
-        ],
+          }
+        }        
+       ]
       },
     }
   
