@@ -67,7 +67,7 @@ const getRecordId = setArray2([]);
 
 
 apiRouter.post("/air_content_input", (req, res) => {
-  
+  item.ini_arr();
   var buyer = JSON.stringify(req.body.action.detailParams.customer.value); 
   var buyer = buyer.replace(/\"/g, "");
   
