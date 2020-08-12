@@ -197,4 +197,23 @@ apiRouter.post("/air_pic_input", (req, res) => {
  },1000); 
 });
 
+apiRouter.post("/checkId", (req, res) => {
+
+   var x = JSON.stringify(req.body);
+
+   const responseBody = {
+      version: "2.0",
+      template: {
+        outputs: [
+          {
+            simpleText: {
+              text: x,  
+          },
+        ],
+      },
+    }
+  
+  res.status(200).send(responseBody);
+});
+
 module.exports.handler = serverless(app);
