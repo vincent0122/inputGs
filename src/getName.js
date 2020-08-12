@@ -11,7 +11,7 @@ const data = [
     "name": "임진강"
   },
   {
-    "wri": "44ad8cc1cfa54644ca2b31d066884fe56e6e7f62e874f88d3d2b9031f286a7404b",
+    "wri": "44a415f5f35ca611d69c967f56f5207cbc6e7f62e874f88d3d2b9031f286a7404b", //done
     "name": "나준호"
   },
   {
@@ -23,7 +23,7 @@ const data = [
     "name": "송혜주"
   },
   {
-    "wri": "66403b9819685f49eb67931a9d6ac55cde1cd5107fc47c33ee04d3b2ae710348b5",
+    "wri": "6660a03fe882e53f7cfb40be6f4073dc811cd5107fc47c33ee04d3b2ae710348b5", //done
     "name": "이선화"
   },
   {
