@@ -1,19 +1,8 @@
-function setArray(arr) {
-  return {
-    get_arr: function () {
-      return arr;
-    },
-    set_arr: function (_url) {
-      arr.push(_url);
-    },
-    ini_arr: function () {
-      arr = [];
-    },
-  };
-}
+var a = [{ff: '1',
+pp: '25'
+        
+}];
 
-const item = setArray([]);
+let result = a.map(s => s.ff)
 
-  item.set_arr("123");
-  var pic = item.get_arr();
-  console.log(pic[1]);
+console.log(result)

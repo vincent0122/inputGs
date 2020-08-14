@@ -198,6 +198,65 @@ apiRouter.post("/air_pic_input", (req, res) => {
  },1000); 
 });
 
+apiRouter.post("/list_record", (req, res) => {
+  
+  var buyer = JSON.stringify(req.body.action.detailParams.customer.value); 
+  var buyer = buyer.replace(/\"/g, "");
+
+   setTimeout(function(){
+
+    base('dataBase').select({
+      filterByFormula: '{거래처}=' + buyer + ''
+  }).eachPage(function page(records, fetchNextPage) {
+      records.forEach(function(record) {
+        
+        var k = record.get("Attachments");
+        if (k != undefined){
+        var kk = k.map(p => p.url);
+          };
+          console.log(record.get('날짜'), record.get('내용'),kk);
+      });
+      fetchNextPage();
+  
+  }, function done(err) {
+      if (err) { console.error(err); return; }
+  });
+},500); // 이렇게 크면. req가 실행되니까 끝나버림
+    
+  setTimeout(function(){
+    const responseBody = {
+      version: "2.0",
+      template: {
+        outputs: [
+          {
+            "basicCard": {
+              "title": "AIRTABLE 사진추가 하실래요?",
+              "thumbnail": {
+                "imageUrl": "https://ifh.cc/g/hltQMO.jpg"
+              },
+              "buttons": [
+                {
+                  "action": "block",
+                  "label": "추가하기",
+                  "blockId": "5f2f475ef8e71a0001de609b"
+                },
+                {
+                  "action":  "message",
+                  "label": "종료하기",
+                  "messageText": "종료"
+                }
+              ]
+            }
+          },
+        ],
+      },
+    };
+  
+  res.status(200).send(responseBody);
+  
+ },1000); 
+});
+
 apiRouter.post("/checkId", (req, res) => {
 
    var x = JSON.stringify(req.body);
