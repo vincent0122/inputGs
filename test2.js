@@ -1,8 +1,4 @@
-var a = [{ff: '1',
-pp: '25'
-        
-}];
+var b = "한펠";
+var a = "{거래처}='" + b + "'";
+console.log(a);
 
-let result = a.map(s => s.ff)
-
-console.log(result)

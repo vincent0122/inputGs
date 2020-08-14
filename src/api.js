@@ -206,7 +206,7 @@ apiRouter.post("/list_record", (req, res) => {
    setTimeout(function(){
 
     base('dataBase').select({
-      filterByFormula: '{거래처}=' + buyer + ''
+      filterByFormula: "{거래처}='" + buyer + "'"
   }).eachPage(function page(records, fetchNextPage) {
       records.forEach(function(record) {
         
@@ -228,29 +228,15 @@ apiRouter.post("/list_record", (req, res) => {
       version: "2.0",
       template: {
         outputs: [
-          {
-            "basicCard": {
-              "title": "AIRTABLE 사진추가 하실래요?",
-              "thumbnail": {
-                "imageUrl": "https://ifh.cc/g/hltQMO.jpg"
-              },
-              "buttons": [
-                {
-                  "action": "block",
-                  "label": "추가하기",
-                  "blockId": "5f2f475ef8e71a0001de609b"
-                },
-                {
-                  "action":  "message",
-                  "label": "종료하기",
-                  "messageText": "종료"
+            {
+                "simpleText": {
+                    "text": buyer + '조회' 
                 }
-              ]
             }
-          },
-        ],
-      },
-    };
+        ]
+    }
+  }
+        
   
   res.status(200).send(responseBody);
   
