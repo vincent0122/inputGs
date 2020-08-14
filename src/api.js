@@ -202,11 +202,12 @@ apiRouter.post("/list_record", (req, res) => {
   
   var buyer = JSON.stringify(req.body.action.detailParams.customer.value); 
   var buyer = buyer.replace(/\"/g, "");
+  listRecord = new Array;
 
    setTimeout(function(){
 
     base('dataBase').select({
-      filterByFormula: "{거래처}='" + buyer + "'"
+      filterByFormula: "{거래처}=\'" + buyer + "\'"
   }).eachPage(function page(records, fetchNextPage) {
       records.forEach(function(record) {
         
@@ -214,13 +215,14 @@ apiRouter.post("/list_record", (req, res) => {
         if (k != undefined){
         var kk = k.map(p => p.url);
           };
-          console.log(record.get('날짜'), record.get('내용'),kk);
+        listRecord.push(console.log(record.get('날짜'), record.get('내용'),kk));
       });
       fetchNextPage();
   
   }, function done(err) {
       if (err) { console.error(err); return; }
   });
+  result = listRecord.join();
 },500); // 이렇게 크면. req가 실행되니까 끝나버림
     
   setTimeout(function(){
@@ -230,7 +232,7 @@ apiRouter.post("/list_record", (req, res) => {
         outputs: [
             {
                 "simpleText": {
-                    "text": buyer + '조회' 
+                    "text": result + '조회' 
                 }
             }
         ]
