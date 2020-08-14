@@ -67,7 +67,7 @@ const getRecordId = setArray2([]);
 
 
 apiRouter.post("/air_content_input", (req, res) => {
-  
+  item.ini_arr();
   var buyer = JSON.stringify(req.body.action.detailParams.customer.value); 
   var buyer = buyer.replace(/\"/g, "");
   
@@ -105,6 +105,7 @@ apiRouter.post("/air_content_input", (req, res) => {
         {
           "basicCard": {
             "title": "AIRTABLE 사진추가 하실래요?",
+            "description" : "거래처 :" + buyer,
             "thumbnail": {
               "imageUrl": "https://ifh.cc/g/hltQMO.jpg"
             },
@@ -128,7 +129,7 @@ apiRouter.post("/air_content_input", (req, res) => {
 
   
   res.status(200).send(responseBody);
-  },1000);
+  },500);
   
 });
 
@@ -195,6 +196,26 @@ apiRouter.post("/air_pic_input", (req, res) => {
   res.status(200).send(responseBody);
   
  },1000); 
+});
+
+apiRouter.post("/checkId", (req, res) => {
+
+   var x = JSON.stringify(req.body);
+
+   const responseBody = {
+      version: "2.0",
+      template: {
+        outputs: [
+          {
+            simpleText: {
+              text: x,  
+          }
+        }        
+       ]
+      },
+    }
+  
+  res.status(200).send(responseBody);
 });
 
 module.exports.handler = serverless(app);
