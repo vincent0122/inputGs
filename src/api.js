@@ -203,52 +203,53 @@ apiRouter.post("/list_record", (req, res) => {
   var buyer = JSON.stringify(req.body.action.detailParams.customer.value); 
   var buyer = buyer.replace(/\"/g, "");
   listRecord = new Array;
-
-   setTimeout(function(){
-
+  
+  setTimeout(function(){
     base('dataBase').select({
       
       filterByFormula: '{거래처}="' + buyer + "\""
   }).eachPage(function page(records, fetchNextPage) {
       records.forEach(function(record) {
         
-        var k = record.get("Attachments");
-        if (k != undefined){
-        var kk = k.map(p => p.url);
+        var aa = record.get("날짜");
+        var bb = record.get("내용");
+        var cc = record.get("Attachments");
+
+        if (cc != undefined){
+        var cc = cc.map(p => p.url);
           };
         //item.set_arr(record.get('날짜') +"  " + record.get('내용') + "  " + kk);
-        item.set_arr(record.get('내용'));
-        
+        item.set_arr(aa + bb + cc);
+       
+      //console.log(result);
       });
+
+      var result = item.get_arr();
+      result3 = result.join("                                                                                                                               ");
 
         fetchNextPage();
   
   }, function done(err) {
       if (err) { console.error(err); return; }
-  });
-},500); // 이렇게 크면. req가 실행되니까 끝나버림
-    
+  });   
+},500);  
+ 
   setTimeout(function(){
-
-    var result2 = item.get_arr();
-    result3 = result2.join();
     const responseBody = {
       version: "2.0",
       template: {
         outputs: [
             {
                 "simpleText": {
-                    "text": result3 + '조회' 
+                    "text": result3  
                 }
             }
         ]
     }
   }
         
-  
   res.status(200).send(responseBody);
-  
- },1000); 
+},1000); 
 });
 
 apiRouter.post("/checkId", (req, res) => {
