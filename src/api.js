@@ -249,6 +249,7 @@ apiRouter.post("/list_record", (req, res) => {
   }
         
   res.status(200).send(responseBody);
+  item.ini_arr();
 },1000); 
 });
 
