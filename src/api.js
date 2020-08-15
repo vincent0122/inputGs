@@ -226,7 +226,7 @@ apiRouter.post("/list_record", (req, res) => {
 
       var result = item.get_arr();
       result3 = result.join("                                                                                                                               ");
-
+        
         fetchNextPage();
   
   }, function done(err) {
