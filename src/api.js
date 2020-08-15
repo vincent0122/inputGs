@@ -207,7 +207,8 @@ apiRouter.post("/list_record", (req, res) => {
    setTimeout(function(){
 
     base('dataBase').select({
-      filterByFormula: "{거래처}=\'" + buyer + "\'"
+      
+      filterByFormula: '{거래처}="' + buyer + "\""
   }).eachPage(function page(records, fetchNextPage) {
       records.forEach(function(record) {
         
@@ -215,24 +216,29 @@ apiRouter.post("/list_record", (req, res) => {
         if (k != undefined){
         var kk = k.map(p => p.url);
           };
-        listRecord.push(console.log(record.get('날짜'), record.get('내용'),kk));
+        //item.set_arr(record.get('날짜') +"  " + record.get('내용') + "  " + kk);
+        item.set_arr(record.get('내용'));
+        
       });
-      fetchNextPage();
+
+        fetchNextPage();
   
   }, function done(err) {
       if (err) { console.error(err); return; }
   });
-  result = listRecord.join();
 },500); // 이렇게 크면. req가 실행되니까 끝나버림
     
   setTimeout(function(){
+
+    var result2 = item.get_arr();
+    result3 = result2.join();
     const responseBody = {
       version: "2.0",
       template: {
         outputs: [
             {
                 "simpleText": {
-                    "text": result + '조회' 
+                    "text": result3 + '조회' 
                 }
             }
         ]
