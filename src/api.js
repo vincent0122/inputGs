@@ -217,7 +217,9 @@ apiRouter.post("/list_record", (req, res) => {
 
         if (cc != undefined){
         var cc = cc.map(p => p.url);
-        //var cc = cc.join(" ");
+        
+        var cc = cc.join(" ");
+        console.log(cc);
           };
         //item.set_arr(record.get('날짜') +"  " + record.get('내용') + "  " + kk);
         item.set_arr(aa + " " + bb + "  " + cc);
@@ -243,6 +245,7 @@ apiRouter.post("/list_record", (req, res) => {
             {
                 "simpleText": {
                     "text": result3  
+                   // "text": "123"
                 }
             }
         ]
