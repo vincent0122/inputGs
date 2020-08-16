@@ -216,11 +216,12 @@ apiRouter.post("/list_record", (req, res) => {
         var cc = record.get("Attachments");
 
         if (cc != undefined){
-        var cc = cc.map(p => p.url);
-        
+        var cc = cc.map(p => p.url);  
         var cc = cc.join(" ");
-        console.log(cc);
-          };
+          }
+        else if(cc === undefined){
+          var cc = "";
+        }
         //item.set_arr(record.get('날짜') +"  " + record.get('내용') + "  " + kk);
         item.set_arr(aa + " " + bb + "  " + cc);
        
