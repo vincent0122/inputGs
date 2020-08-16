@@ -217,15 +217,16 @@ apiRouter.post("/list_record", (req, res) => {
 
         if (cc != undefined){
         var cc = cc.map(p => p.url);
+        var cc = cc.join(" ");
           };
         //item.set_arr(record.get('날짜') +"  " + record.get('내용') + "  " + kk);
-        item.set_arr(aa + bb + cc);
+        item.set_arr(aa + " " + bb + "  " + cc);
        
       //console.log(result);
       });
 
       var result = item.get_arr();
-      result3 = result.join(" /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+      result3 = result.join(" /////////////////////////////////////////////////////////////////////////////////////////////");
         
         fetchNextPage();
   
