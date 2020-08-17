@@ -39,6 +39,9 @@ function setArray(arr) {
     set_arr: function (_url) {
       arr.push(_url);
     },
+    sort_arr: function () {
+      arr.sort();
+    },
     ini_arr: function () {
       arr = [];
     },
@@ -228,6 +231,7 @@ apiRouter.post("/list_record", (req, res) => {
       //console.log(result);
       });
 
+      item.sort_arr();
       var result = item.get_arr();
       result3 = result.join(" /////////////////////////////////////////////////////////////////////// ");
         
