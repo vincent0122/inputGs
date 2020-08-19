@@ -1,8 +1,5 @@
-// TODO: Hide API KEYS. 완료
 // setTimeout을 await async로 바꿔야 함 
-// 메뉴에 form으로 입력하는 방법 추가 완료
-// 카카오톡 사진 파일 자동 크기 줄이기 안해도 돼
-// 동의어를 입력해도 입력한값이 그대로 들어가네? 해결
+// 월별 실적 조회. 이건 구글시트를 연동해야 되는데
 
 const express = require("express");
 const asyncify = require("express-asyncify");
@@ -107,7 +104,7 @@ apiRouter.post("/air_content_input", (req, res) => {
             "title": "AIRTABLE 사진추가 하실래요? 한장씩만 가능!!",
             "description" : "거래처 :" + buyer,
             "thumbnail": {
-              "imageUrl": "https://ifh.cc/g/hltQMO.jpg"
+              "imageUrl": "https://ifh.cc/g/Bo8Ecb.jpg"
             },
             "buttons": [
               {
@@ -173,7 +170,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
             "basicCard": {
               "title": "AIRTABLE 사진추가 하실래요? 한장씩만 가능!!",
               "thumbnail": {
-                "imageUrl": "https://ifh.cc/g/hltQMO.jpg"
+                "imageUrl": "https://ifh.cc/g/Bo8Ecb.jpg"
               },
               "buttons": [
                 {
