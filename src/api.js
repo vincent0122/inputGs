@@ -104,7 +104,7 @@ apiRouter.post("/air_content_input", (req, res) => {
       outputs: [
         {
           "basicCard": {
-            "title": "AIRTABLE 사진추가 하실래요?",
+            "title": "AIRTABLE 사진추가 하실래요? 한장씩만 가능!!",
             "description" : "거래처 :" + buyer,
             "thumbnail": {
               "imageUrl": "https://ifh.cc/g/hltQMO.jpg"
@@ -171,7 +171,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
         outputs: [
           {
             "basicCard": {
-              "title": "AIRTABLE 사진추가 하실래요?",
+              "title": "AIRTABLE 사진추가 하실래요? 한장씩만 가능!!",
               "thumbnail": {
                 "imageUrl": "https://ifh.cc/g/hltQMO.jpg"
               },
