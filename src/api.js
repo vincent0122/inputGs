@@ -192,7 +192,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
   
   res.status(200).send(responseBody);
   
- },1000); 
+ },1500); 
 });
 
 apiRouter.post("/checkId", (req, res) => {
