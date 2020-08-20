@@ -69,8 +69,7 @@ apiRouter.post("/air_content_input", (req, res) => {
   var buyer = buyer.replace(/\"/g, "");
   
   //var info = JSON.stringify(req.body);
-  var content = JSON.stringify(req.body.action.detailParams.contents.origin);  
-  var contents = content.replace(/\"/g, "");
+  var content = req.body.action.detailParams.contents.origin;  
 
   var writer = JSON.stringify(req.body.userRequest.user.id);
   var wri = writer.replace(/\"/g, "");
@@ -81,7 +80,7 @@ apiRouter.post("/air_content_input", (req, res) => {
     날짜: date,
     거래처: buyer,
     작성자: wri,
-    내용: contents
+    내용: content
     
   }, function(err, record) {
     if (err) {
