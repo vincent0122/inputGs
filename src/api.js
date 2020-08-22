@@ -1,8 +1,5 @@
-// TODO: Hide API KEYS. 완료
 // setTimeout을 await async로 바꿔야 함 
-// 메뉴에 form으로 입력하는 방법 추가 완료
-// 카카오톡 사진 파일 자동 크기 줄이기 안해도 돼
-// 동의어를 입력해도 입력한값이 그대로 들어가네? 해
+// 월별 실적 조회. 이건 구글시트를 연동해야 되는데
 
 const express = require("express");
 const asyncify = require("express-asyncify");
@@ -39,9 +36,6 @@ function setArray(arr) {
     set_arr: function (_url) {
       arr.push(_url);
     },
-    sort_arr: function () {
-      arr.sort();
-    },
     ini_arr: function () {
       arr = [];
     },
@@ -75,8 +69,7 @@ apiRouter.post("/air_content_input", (req, res) => {
   var buyer = buyer.replace(/\"/g, "");
   
   //var info = JSON.stringify(req.body);
-  var content = JSON.stringify(req.body.action.detailParams.contents.origin);  
-  var contents = content.replace(/\"/g, "");
+  var content = req.body.action.detailParams.contents.origin;  
 
   var writer = JSON.stringify(req.body.userRequest.user.id);
   var wri = writer.replace(/\"/g, "");
@@ -87,7 +80,7 @@ apiRouter.post("/air_content_input", (req, res) => {
     날짜: date,
     거래처: buyer,
     작성자: wri,
-    내용: contents
+    내용: content
     
   }, function(err, record) {
     if (err) {
@@ -107,10 +100,10 @@ apiRouter.post("/air_content_input", (req, res) => {
       outputs: [
         {
           "basicCard": {
-            "title": "AIRTABLE 사진추가 하실래요?",
+            "title": "AIRTABLE 사진추가 하실래요?        한장씩만 가능!!",
             "description" : "거래처 :" + buyer,
             "thumbnail": {
-              "imageUrl": "https://ifh.cc/g/hltQMO.jpg"
+              "imageUrl": "https://ifh.cc/g/Bo8Ecb.jpg"
             },
             "buttons": [
               {
@@ -174,9 +167,9 @@ apiRouter.post("/air_pic_input", (req, res) => {
         outputs: [
           {
             "basicCard": {
-              "title": "AIRTABLE 사진추가 하실래요?",
+              "title": "AIRTABLE 사진추가 하실래요?        한장씩만 가능!!",
               "thumbnail": {
-                "imageUrl": "https://ifh.cc/g/hltQMO.jpg"
+                "imageUrl": "https://ifh.cc/g/Bo8Ecb.jpg"
               },
               "buttons": [
                 {
@@ -198,7 +191,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
   
   res.status(200).send(responseBody);
   
- },1000); 
+ },1500); 
 });
 
 apiRouter.post("/list_record", (req, res) => {
