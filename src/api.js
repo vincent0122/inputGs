@@ -210,7 +210,6 @@ apiRouter.post("/list_record", (req, res) => {
         var aa = record.get("날짜");
         var bb = record.get("내용");
         var cc = record.get("Attachments");
-
         if (cc != undefined){
         var cc = cc.map(p => p.url);  
         var cc = cc.join(" ");
@@ -226,8 +225,8 @@ apiRouter.post("/list_record", (req, res) => {
 
       item.sort_arr();
       var result = item.get_arr();
-      result3 = result.join(" ///////////////////////////////////////////////////////////////////// ");
-        
+      result3 = result.join(" /////////////////////////////////////////////////////////////////////// ");
+
         fetchNextPage();
   
   }, function done(err) {
