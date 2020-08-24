@@ -161,7 +161,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
     }
     console.log(record.get('Name'));
   });
-},500); // 이렇게 크면. req가 실행되니까 끝나버림
+},1000); // 이렇게 크면. req가 실행되니까 끝나버림
     
   setTimeout(function(){
     const responseBody = {
