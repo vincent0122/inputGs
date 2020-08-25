@@ -70,22 +70,36 @@ apiRouter.post("/gs_cost_input", (req, res) => {
   const {
     google
   } = require('googleapis');
-  const contents = "123123123"
-  const contentss = "22222222222223123123"
+  
+ const creden = {
+    "installed": {
+        "client_id": "395766971615-uldd4ibgbiqa78kv5dp7qg1huqrpob3u.apps.googleusercontent.com",
+        "project_id": "quickstart-1598247341881",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_secret": "WfVO-uCBm5plI1GT7OlB_vE8",
+        "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob", "http://localhost"]
+    }
+};
+
+const toke = {
+  "access_token": "ya29.a0AfH6SMBm0Gp30-w6aDs5JoSuxheFNkZg4MjwNPj7d2UUH7BN7T8yRQpnGAQG1TYgOXZHDuWZEBTh9q7ZTOo66LoTJWpH2Z87FimBClukzohu1T3D38jN_0uUtyJnupmTO_IGbafS2O8-wwauYxRQsGjCubcgi_OyflI",
+  "refresh_token": "1//0erRg5CzdX3qtCgYIARAAGA4SNwF-L9Irqv0CQ1y_4R3xXZUwrBLFajVuM4bO5iy3DMiF140OlYkaaZDy7-kXOrDE8DhkR_L7UJw",
+  "scope": "https://www.googleapis.com/auth/spreadsheets",
+  "token_type": "Bearer",
+  "expiry_date": 1598260908685
+};
 
   // If modifying these scopes, delete token.json.
   const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
   // The file token.json stores the user's access and refresh tokens, and is
   // created automatically when the authorization flow completes for the first
   // time.
-  const TOKEN_PATH = 'token.json';
+  //const TOKEN_PATH = 'token.json';
 
-  // Load client secrets from a local file.
-  fs.readFile('credentials.json', (err, content) => {
-    if (err) return console.log('Error loading client secret file:', err);
-    // Authorize a client with credentials, then call the Google Sheets API.
-    authorize(JSON.parse(content), inputCost);
-  });
+   authorize(creden, inputCost);
+  
 
   function authorize(credentials, callback) {
     const {
@@ -97,12 +111,11 @@ apiRouter.post("/gs_cost_input", (req, res) => {
       client_id, client_secret, redirect_uris[0]);
 
     // Check if we have previously stored a token.
-    fs.readFile(TOKEN_PATH, (err, token) => {
-      if (err) return getNewToken(oAuth2Client, callback);
-      oAuth2Client.setCredentials(JSON.parse(token));
+    
+      oAuth2Client.setCredentials(toke);
       callback(oAuth2Client);
-    });
   }
+  
 
   function getNewToken(oAuth2Client, callback) {
     const authUrl = oAuth2Client.generateAuthUrl({
