@@ -12,7 +12,7 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 
 const Airtable = require("airtable");
-const base = new Airtable({apiKey: 'keynCOHYwnnoQZDeB'}).base('appmdFjy715yHPmNw');
+const base = new Airtable({apiKey: process.env.API_KEY}).base('appmdFjy715yHPmNw');
 const getName = require('./getName.js')
 
 app.use(logger("dev", {}));
@@ -64,7 +64,158 @@ function setArray2(ids) {
 const getRecordId = setArray2([]);
 
 //클로저 함수 끝(for get record Id)
+apiRouter.post("/gs_cost_input", (req, res) => {
+  const fs = require('fs');
+  const readline = require('readline');
+  const {
+    google
+  } = require('googleapis');
+  const contents = "123123123"
+  const contentss = "22222222222223123123"
 
+  // If modifying these scopes, delete token.json.
+  const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
+  // The file token.json stores the user's access and refresh tokens, and is
+  // created automatically when the authorization flow completes for the first
+  // time.
+  const TOKEN_PATH = 'token.json';
+
+  // Load client secrets from a local file.
+  fs.readFile('credentials.json', (err, content) => {
+    if (err) return console.log('Error loading client secret file:', err);
+    // Authorize a client with credentials, then call the Google Sheets API.
+    authorize(JSON.parse(content), inputCost);
+  });
+
+  function authorize(credentials, callback) {
+    const {
+      client_secret,
+      client_id,
+      redirect_uris
+    } = credentials.installed;
+    const oAuth2Client = new google.auth.OAuth2(
+      client_id, client_secret, redirect_uris[0]);
+
+    // Check if we have previously stored a token.
+    fs.readFile(TOKEN_PATH, (err, token) => {
+      if (err) return getNewToken(oAuth2Client, callback);
+      oAuth2Client.setCredentials(JSON.parse(token));
+      callback(oAuth2Client);
+    });
+  }
+
+  function getNewToken(oAuth2Client, callback) {
+    const authUrl = oAuth2Client.generateAuthUrl({
+      access_type: 'offline',
+      scope: SCOPES,
+    });
+    console.log('Authorize this app by visiting this url:', authUrl);
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+    rl.question('Enter the code from that page here: ', (code) => {
+      rl.close();
+      oAuth2Client.getToken(code, (err, token) => {
+        if (err) return console.error('Error while trying to retrieve access token', err);
+        oAuth2Client.setCredentials(token);
+        // Store the token to disk for later program executions
+        fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
+          if (err) return console.error(err);
+          console.log('Token stored to', TOKEN_PATH);
+        });
+        callback(oAuth2Client);
+      });
+    });
+  }
+
+  function inputCost(auth) {
+    const sheets = google.sheets({
+      version: 'v4',
+      auth
+    });
+    const mySpreadSheetId = '1SXZ9o5ca3B-bsUozboQrFOht8z_oqsX9U_bQTMl9ytQ'
+    const sheetName = 'kakaoInput'
+
+    sheets.spreadsheets.values.get({
+      spreadsheetId: mySpreadSheetId,
+      range: `${sheetName}!C:C`,
+    }, (err, res) => {
+      if (err) return console.log('The API returned an error: ' + err);
+      const data = res.data.values;
+      let i = data.length;
+      console.log(i)
+
+      sheets.spreadsheets.values.update({
+        spreadsheetId: mySpreadSheetId,
+        range: `${sheetName}!C${i + 1}`,
+        valueInputOption: "USER_ENTERED",
+        resource: {
+          majorDimension: "ROWS",
+          values: [
+            ["123", "456"]
+          ]
+        }
+      }, (err, result) => {
+        if (err) {
+          // Handle error
+          console.log(err);
+        } else {
+          console.log('%d cells updated.', result.updatedCells);
+        }
+      });
+
+
+    });
+  }
+
+  item.ini_arr();
+  var buyer = JSON.stringify(req.body.action.detailParams.customer.value);
+  var buyer = buyer.replace(/\"/g, "");
+
+  //var info = JSON.stringify(req.body);
+  var content = req.body.action.detailParams.contents.origin;
+
+  var writer = JSON.stringify(req.body.userRequest.user.id);
+  var wri = writer.replace(/\"/g, "");
+  var wri = getName(wri);
+  var wri = wri[0].name
+
+  //inputCost(auth, buyer, wri)
+
+
+  setTimeout(function () {
+    const responseBody = {
+      version: "2.0",
+      template: {
+        outputs: [{
+          "basicCard": {
+            "title": "AIRTABLE 사진추가 하실래요?        한장씩만 가능!!",
+            "description": "거래처 :" + buyer,
+            "thumbnail": {
+              "imageUrl": "https://ifh.cc/g/Bo8Ecb.jpg"
+            },
+            "buttons": [{
+                "action": "block",
+                "label": "추가하기",
+                "blockId": "5f2f475ef8e71a0001de609b"
+              },
+              {
+                "action": "message",
+                "label": "종료하기",
+                "messageText": "종료"
+              }
+            ]
+          }
+        }, ],
+      },
+    };
+
+
+    res.status(200).send(responseBody);
+  }, 500);
+
+});
 
 apiRouter.post("/air_content_input", (req, res) => {
   item.ini_arr();
