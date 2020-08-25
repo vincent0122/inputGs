@@ -134,7 +134,7 @@ const toke = {
 
     sheets.spreadsheets.values.get({
       spreadsheetId: mySpreadSheetId,
-      range: `${sheetName}!C:C`,
+      range: `${sheetName}!A:A`,
     }, (err, res) => {
       if (err) return console.log('The API returned an error: ' + err);
       const data = res.data.values;
@@ -148,7 +148,8 @@ const toke = {
         resource: {
           majorDimension: "ROWS",
           values: [
-            [date, wri, amount, content]
+            //[date, wri, amount, content]
+            ["123"]
           ]
         }
       }, (err, result) => {
