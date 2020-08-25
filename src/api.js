@@ -4,6 +4,7 @@
 const express = require("express");
 const asyncify = require("express-asyncify");
 const serverless = require("serverless-http");
+require('dotenv').config();
 
 const app = asyncify(express());
 const apiRouter = express.Router();
@@ -73,19 +74,19 @@ apiRouter.post("/gs_cost_input", (req, res) => {
   
  const creden = {
     "installed": {
-        "client_id": "395766971615-uldd4ibgbiqa78kv5dp7qg1huqrpob3u.apps.googleusercontent.com",
-        "project_id": "quickstart-1598247341881",
-        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-        "token_uri": "https://oauth2.googleapis.com/token",
-        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-        "client_secret": "WfVO-uCBm5plI1GT7OlB_vE8",
-        "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob", "http://localhost"]
+        "client_id": process.env.CLIENT_ID,
+        "project_id": process.env.PROJECT_ID,
+        "auth_uri": process.env.AUTH_URI,
+        "token_uri": process.env.TOKEN_URI,
+        "auth_provider_x509_cert_url": process.env.AUTH_PROVIDER_X509_CERT_URL,
+        "client_secret": process.env.CLIENT_SECRET,
+        "redirect_uris": process.env.REDIRECT_URIS
     }
 };
 
 const toke = {
-  "access_token": "ya29.a0AfH6SMBm0Gp30-w6aDs5JoSuxheFNkZg4MjwNPj7d2UUH7BN7T8yRQpnGAQG1TYgOXZHDuWZEBTh9q7ZTOo66LoTJWpH2Z87FimBClukzohu1T3D38jN_0uUtyJnupmTO_IGbafS2O8-wwauYxRQsGjCubcgi_OyflI",
-  "refresh_token": "1//0erRg5CzdX3qtCgYIARAAGA4SNwF-L9Irqv0CQ1y_4R3xXZUwrBLFajVuM4bO5iy3DMiF140OlYkaaZDy7-kXOrDE8DhkR_L7UJw",
+  "access_token": process.env.ACCESS_TOKEN,
+  "refresh_token": process.env.REFRESH_TOKEN,
   "scope": "https://www.googleapis.com/auth/spreadsheets",
   "token_type": "Bearer",
   "expiry_date": 1598260908685
@@ -166,7 +167,7 @@ const toke = {
         resource: {
           majorDimension: "ROWS",
           values: [
-            ["123", "456"]
+            ["555", "77"]
           ]
         }
       }, (err, result) => {
