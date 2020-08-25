@@ -66,9 +66,15 @@ const getRecordId = setArray2([]);
 
 //클로저 함수 끝(for get record Id)
 apiRouter.post("/gs_cost_input", (req, res) => {
-  const fs = require('fs');
-  const readline = require('readline');
-  const {
+  var amount = JSON.stringify(req.body.action.detailParams.amount.value);
+  var amount = amount.replace(/\"/g, "");
+  var content = req.body.action.detailParams.naeyong.origin;
+  var writer = JSON.stringify(req.body.userRequest.user.id);
+  var wri = writer.replace(/\"/g, "");
+  var wri = getName(wri);
+  var wri = wri[0].name
+
+   const {
     google
   } = require('googleapis');
   
@@ -118,31 +124,6 @@ const toke = {
   }
   
 
-  function getNewToken(oAuth2Client, callback) {
-    const authUrl = oAuth2Client.generateAuthUrl({
-      access_type: 'offline',
-      scope: SCOPES,
-    });
-    console.log('Authorize this app by visiting this url:', authUrl);
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-    rl.question('Enter the code from that page here: ', (code) => {
-      rl.close();
-      oAuth2Client.getToken(code, (err, token) => {
-        if (err) return console.error('Error while trying to retrieve access token', err);
-        oAuth2Client.setCredentials(token);
-        // Store the token to disk for later program executions
-        fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-          if (err) return console.error(err);
-          console.log('Token stored to', TOKEN_PATH);
-        });
-        callback(oAuth2Client);
-      });
-    });
-  }
-
   function inputCost(auth) {
     const sheets = google.sheets({
       version: 'v4',
@@ -162,12 +143,12 @@ const toke = {
 
       sheets.spreadsheets.values.update({
         spreadsheetId: mySpreadSheetId,
-        range: `${sheetName}!C${i + 1}`,
+        range: `${sheetName}!A${i + 1}`,
         valueInputOption: "USER_ENTERED",
         resource: {
           majorDimension: "ROWS",
           values: [
-            ["555", "77"]
+            [date, wri, amount, content]
           ]
         }
       }, (err, result) => {
@@ -183,45 +164,18 @@ const toke = {
     });
   }
 
-  item.ini_arr();
-  var buyer = JSON.stringify(req.body.action.detailParams.customer.value);
-  var buyer = buyer.replace(/\"/g, "");
-
-  //var info = JSON.stringify(req.body);
-  var content = req.body.action.detailParams.contents.origin;
-
-  var writer = JSON.stringify(req.body.userRequest.user.id);
-  var wri = writer.replace(/\"/g, "");
-  var wri = getName(wri);
-  var wri = wri[0].name
-
-  //inputCost(auth, buyer, wri)
-
-
   setTimeout(function () {
     const responseBody = {
       version: "2.0",
       template: {
-        outputs: [{
-          "basicCard": {
-            "title": "AIRTABLE 사진추가 하실래요?        한장씩만 가능!!",
-            "description": "거래처 :" + buyer,
-            "thumbnail": {
-              "imageUrl": "https://ifh.cc/g/Bo8Ecb.jpg"
-            },
-            "buttons": [{
-                "action": "block",
-                "label": "추가하기",
-                "blockId": "5f2f475ef8e71a0001de609b"
-              },
-              {
-                "action": "message",
-                "label": "종료하기",
-                "messageText": "종료"
+        outputs: [
+          {
+              "simpleText": {
+                  "text": "입력 완료되엇습니다!"
+                 
               }
-            ]
           }
-        }, ],
+       ]
       },
     };
 
