@@ -6,8 +6,8 @@ const asyncify = require("express-asyncify");
 const serverless = require("serverless-http");
 require('dotenv').config();
 
-const app = asyncify(express());
-const apiRouter = express.Router();
+const app = express();
+const apiRouter = asyncify(express.Router());
 
 const logger = require("morgan");
 const bodyParser = require("body-parser");
@@ -16,6 +16,7 @@ const Airtable = require("airtable");
 const base = new Airtable({apiKey: process.env.API_KEY}).base('appmdFjy715yHPmNw');
 const getName = require('./getName.js')
 
+//미들웨어 함수를 로드하려면 미들웨어 함수를 지정하여 app.use()를 호출하십시오
 app.use(logger("dev", {}));
 app.use(bodyParser.json());
 app.use(
@@ -186,20 +187,21 @@ const toke = {
 
 });
 
-apiRouter.post("/air_content_input", (req, res) => {
-  item.ini_arr();
-  var buyer = JSON.stringify(req.body.action.detailParams.customer.value); 
-  var buyer = buyer.replace(/\"/g, "");
+apiRouter.post("/air_content_input", async(req, res) => {
+  
+
+  await item.ini_arr();
+  var buyer = await JSON.stringify(req.body.action.detailParams.customer.value); 
+  var buyer = await buyer.replace(/\"/g, "");
   
   //var info = JSON.stringify(req.body);
-  var content = req.body.action.detailParams.contents.origin;  
+  var content = await req.body.action.detailParams.contents.origin;  
+  var writer = await JSON.stringify(req.body.userRequest.user.id);
+  var wri = await writer.replace(/\"/g, "");
+  var wri = await getName(wri);
+  var wri = await wri[0].name
 
-  var writer = JSON.stringify(req.body.userRequest.user.id);
-  var wri = writer.replace(/\"/g, "");
-  var wri = getName(wri);
-  var wri = wri[0].name
-
-  base("dataBase").create({
+  await base("dataBase").create({
     날짜: date,
     거래처: buyer,
     작성자: wri,
@@ -216,7 +218,6 @@ apiRouter.post("/air_content_input", (req, res) => {
       
   });
   
-  setTimeout(function(){
   const responseBody = {
     version: "2.0",
     template: {
@@ -248,12 +249,11 @@ apiRouter.post("/air_content_input", (req, res) => {
 
   
   res.status(200).send(responseBody);
-  },500);
-  
 });
 
 apiRouter.post("/air_pic_input", (req, res) => {
 
+  async function varl(){
   var x = JSON.stringify(req.body);
   var block_Id = getRecordId.get_id();
   //var block_Id = block_Id[0];
@@ -269,9 +269,9 @@ apiRouter.post("/air_pic_input", (req, res) => {
       data.url = pic2[i];
       picList.push(data);
    }; 
+  };
 
-   setTimeout(function(){
-   base('dataBase').update(block_Id, {
+   varl().then(base('dataBase').update(block_Id, {
     
     "Attachments": picList
   }, function(err, record) {
@@ -280,8 +280,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
       return;
     }
     console.log(record.get('Name'));
-  });
-},500); // 이렇게 크면. req가 실행되니까 끝나버림
+  })); // 이렇게 크면. req가 실행되니까 끝나버림
     
   setTimeout(function(){
     const responseBody = {
