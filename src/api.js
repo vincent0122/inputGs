@@ -248,7 +248,7 @@ apiRouter.post("/air_content_input", async(req, res) => {
   };
 
   
-  res.status(200).send(responseBody);
+ await res.status(200).send(responseBody);
 });
 
 apiRouter.post("/air_pic_input", (req, res) => {
