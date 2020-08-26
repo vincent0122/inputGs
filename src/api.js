@@ -6,8 +6,8 @@ const asyncify = require("express-asyncify");
 const serverless = require("serverless-http");
 require('dotenv').config();
 
-const app = express();
-const apiRouter = asyncify(express.Router());
+const app = asyncify(express());
+const apiRouter = express.Router();
 
 const logger = require("morgan");
 const bodyParser = require("body-parser");
