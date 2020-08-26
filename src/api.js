@@ -201,17 +201,12 @@ apiRouter.post("/air_content_input", async(req, res) => {
   var wri =  wri[0].name
 
    base("dataBase").create({
-    /* 날짜: date,
+    날짜: date,
     거래처: buyer,
     작성자: wri,
-    내용: content */
-    
-    내용: "1"
-  }, function(err, record) {
-    if (err) {
-      console.error(err);
-      return;
-    }
+    내용: content 
+  }, function(record) {
+
       console.log(record.getId()); 
       var record_id = record.getId();
       getRecordId.set_id(record_id);
