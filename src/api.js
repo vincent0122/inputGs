@@ -205,8 +205,11 @@ apiRouter.post("/air_content_input", (req, res) => {
     거래처: buyer,
     작성자: wri,
     내용: content 
-  }, function(record) {
-
+  }, function(err, record) {
+    if (err) {
+      console.error(err);
+      return;
+    }
       console.log(record.getId()); 
       var record_id = record.getId();
       getRecordId.set_id(record_id);
@@ -250,7 +253,7 @@ apiRouter.post("/air_content_input", (req, res) => {
 
 apiRouter.post("/air_pic_input", (req, res) => {
 
-  async function varl(){
+
   var x = JSON.stringify(req.body);
   var block_Id = getRecordId.get_id();
   //var block_Id = block_Id[0];
@@ -266,9 +269,8 @@ apiRouter.post("/air_pic_input", (req, res) => {
       data.url = pic2[i];
       picList.push(data);
    }; 
-  };
 
-   varl().then(base('dataBase').update(block_Id, {
+   base('dataBase').update(block_Id, {
     
     "Attachments": picList
   }, function(err, record) {
@@ -277,7 +279,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
       return;
     }
     console.log(record.get('Name'));
-  })); // 이렇게 크면. req가 실행되니까 끝나버림
+  }); // 이렇게 크면. req가 실행되니까 끝나버림
     
   setTimeout(function(){
     const responseBody = {
@@ -310,7 +312,7 @@ apiRouter.post("/air_pic_input", (req, res) => {
   
   res.status(200).send(responseBody);
   
- },2000); 
+ },500); 
 });
 
 apiRouter.post("/list_record", (req, res) => {
