@@ -205,9 +205,7 @@ apiRouter.post("/air_content_input", async(req, res) => {
     거래처: buyer,
     작성자: wri,
     내용: content */
-    날짜: "1",
-    거래처: "1",
-    작성자: "1",
+    
     내용: "1"
   }, function(err, record) {
     if (err) {
