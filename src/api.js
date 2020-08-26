@@ -213,6 +213,7 @@ apiRouter.post("/air_content_input", (req, res) => {
       
   });
   
+  setTimeout(function(){
   const responseBody = {
     version: "2.0",
     template: {
@@ -243,7 +244,8 @@ apiRouter.post("/air_content_input", (req, res) => {
   };
 
   
-  res.status(200).send(responseBody);
+  res.status(200).send(responseBody);  //이게 일찍 끝나서 문제..
+},500);
 });
 
 apiRouter.post("/air_pic_input", (req, res) => {
