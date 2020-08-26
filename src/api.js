@@ -188,19 +188,17 @@ const toke = {
 });
 
 apiRouter.post("/air_content_input", async(req, res) => {
-  
-  await (function(){
+
   item.ini_arr();
-  var buyer = JSON.stringify(req.body.action.detailParams.customer.value); 
+  var buyer = await JSON.stringify(req.body.action.detailParams.customer.value); 
   var buyer = buyer.replace(/\"/g, "");
   
   //var info = JSON.stringify(req.body);
   var content =  req.body.action.detailParams.contents.origin;  
-  var writer =  JSON.stringify(req.body.userRequest.user.id);
+  var writer =  await JSON.stringify(req.body.userRequest.user.id);
   var wri =  writer.replace(/\"/g, "");
   var wri =  getName(wri);
   var wri =  wri[0].name
-  });
 
    base("dataBase").create({
     날짜: date,
