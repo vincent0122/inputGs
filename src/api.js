@@ -201,7 +201,7 @@ apiRouter.post("/air_content_input", async(req, res) => {
   var wri = await getName(wri);
   var wri = await wri[0].name
 
-  await base("dataBase").create({
+   base("dataBase").create({
     날짜: date,
     거래처: buyer,
     작성자: wri,
@@ -248,7 +248,7 @@ apiRouter.post("/air_content_input", async(req, res) => {
   };
 
   
- await res.status(200).send(responseBody);
+  res.status(200).send(responseBody);
 });
 
 apiRouter.post("/air_pic_input", (req, res) => {
