@@ -190,22 +190,25 @@ const toke = {
 apiRouter.post("/air_content_input", async(req, res) => {
 
   item.ini_arr();
-  var buyer = await JSON.stringify(req.body.action.detailParams.customer.value); 
+  var buyer = JSON.stringify(req.body.action.detailParams.customer.value); 
   var buyer = buyer.replace(/\"/g, "");
   
   //var info = JSON.stringify(req.body);
   var content =  req.body.action.detailParams.contents.origin;  
-  var writer =  await JSON.stringify(req.body.userRequest.user.id);
+  var writer = JSON.stringify(req.body.userRequest.user.id);
   var wri =  writer.replace(/\"/g, "");
   var wri =  getName(wri);
   var wri =  wri[0].name
 
    base("dataBase").create({
-    날짜: date,
+    /* 날짜: date,
     거래처: buyer,
     작성자: wri,
-    내용: content
-    
+    내용: content */
+    날짜: "1",
+    거래처: "1",
+    작성자: "1",
+    내용: "1"
   }, function(err, record) {
     if (err) {
       console.error(err);
