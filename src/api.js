@@ -166,7 +166,7 @@ const toke = {
     });
   }
 
-  setTimeout(function () {
+  await (function () {
     const responseBody = {
       version: "2.0",
       template: {
@@ -183,7 +183,7 @@ const toke = {
 
 
     res.status(200).send(responseBody);
-  }, 3000);
+  })
 
 });
 
