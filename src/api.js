@@ -6,8 +6,8 @@ const asyncify = require("express-asyncify");
 const serverless = require("serverless-http");
 require('dotenv').config();
 
-const app = asyncify(express());
-const apiRouter = express.Router();
+const app = express();
+const apiRouter = asyncify(express.Router());
 
 const logger = require("morgan");
 const bodyParser = require("body-parser");
@@ -66,7 +66,7 @@ function setArray2(ids) {
 const getRecordId = setArray2([]);
 
 //클로저 함수 끝(for get record Id)
-apiRouter.post("/gs_cost_input", (req, res) => {
+apiRouter.post("/gs_cost_input", async(req, res) => {
   var amount = JSON.stringify(req.body.action.detailParams.amount.value);
   var amount = amount.replace(/\"/g, "");
   var content = req.body.action.detailParams.naeyong.origin;
@@ -106,7 +106,7 @@ const toke = {
   // time.
   //const TOKEN_PATH = 'token.json';
 
-   authorize(creden, inputCost);
+  await authorize(creden, inputCost);
   
 
   function authorize(credentials, callback) {
@@ -125,7 +125,7 @@ const toke = {
   }
   
 
-  function inputCost(auth) {
+  await function inputCost(auth) {
     const sheets = google.sheets({
       version: 'v4',
       auth
@@ -183,7 +183,7 @@ const toke = {
 
 
     res.status(200).send(responseBody);
-  }, 500);
+  }, 3000);
 
 });
 
