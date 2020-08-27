@@ -66,7 +66,7 @@ function setArray2(ids) {
 const getRecordId = setArray2([]);
 
 //클로저 함수 끝(for get record Id)
-apiRouter.post("/gs_cost_input", async(req, res) => {
+apiRouter.post("/gs_cost_input", (req, res) => {
   var amount = JSON.stringify(req.body.action.detailParams.amount.value);
   var amount = amount.replace(/\"/g, "");
   var content = req.body.action.detailParams.naeyong.origin;
@@ -98,15 +98,7 @@ const toke = {
   "token_type": "Bearer",
   "expiry_date": 1598260908685
 };
-
-  // If modifying these scopes, delete token.json.
-  const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
-  // The file token.json stores the user's access and refresh tokens, and is
-  // created automatically when the authorization flow completes for the first
-  // time.
-  //const TOKEN_PATH = 'token.json';
-
-  await authorize(creden, inputCost);
+  authorize(creden, inputCost);
   
 
   function authorize(credentials, callback) {
@@ -125,22 +117,23 @@ const toke = {
   }
   
 
-  await function inputCost(auth) {
+  function inputCost(auth) {
     const sheets = google.sheets({
       version: 'v4',
       auth
     });
-    const mySpreadSheetId = '1SXZ9o5ca3B-bsUozboQrFOht8z_oqsX9U_bQTMl9ytQ'
-    const sheetName = 'kakaoInput'
+    const mySpreadSheetId = '1SXZ9o5ca3B-bsUozboQrFOht8z_oqsX9U_bQTMl9ytQ';
+    const sheetName = 'kakaoInput';
 
     sheets.spreadsheets.values.get({
       spreadsheetId: mySpreadSheetId,
       range: `${sheetName}!A:A`,
     }, (err, res) => {
-      if (err) return console.log('The API returned an error: ' + err);
+      if (err)
+        return console.log('The API returned an error: ' + err);
       const data = res.data.values;
       let i = data.length;
-      console.log(i)
+      console.log(i);
 
       sheets.spreadsheets.values.update({
         spreadsheetId: mySpreadSheetId,
@@ -157,7 +150,8 @@ const toke = {
         if (err) {
           // Handle error
           console.log(err);
-        } else {
+        }
+        else {
           console.log('%d cells updated.', result.updatedCells);
         }
       });
@@ -166,25 +160,21 @@ const toke = {
     });
   }
 
-  await (function () {
     const responseBody = {
       version: "2.0",
       template: {
         outputs: [
           {
-              "simpleText": {
-                  "text": "입력 완료되엇습니다!"
-                 
-              }
+            "simpleText": {
+              "text": "입력 완료되엇습니다!"
+            }
           }
-       ]
+        ]
       },
     };
 
 
     res.status(200).send(responseBody);
-  })
-
 });
 
 apiRouter.post("/air_content_input", (req, res) => {
