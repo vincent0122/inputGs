@@ -88,7 +88,7 @@ const toke = {
 "expiry_date": 1598260908685
 };
 
-function authorize(credentials, callback) {
+function authorize(credentials, param2, callback) {
   const {
     client_secret,
     client_id,
@@ -100,10 +100,10 @@ function authorize(credentials, callback) {
   // Check if we have previously stored a token.
   
     oAuth2Client.setCredentials(toke);
-    callback(oAuth2Client);
+    callback(oAuth2Client, param2);
 }
 
-function inputCost(auth) {
+function inputCost(auth, _inputData) {
   const sheets = google.sheets({
     version: 'v4',
     auth
@@ -128,7 +128,8 @@ function inputCost(auth) {
       resource: {
         majorDimension: "ROWS",
         values: [
-          [date, wri, amount, content]            
+          //[date, wri, amount, content]
+          _inputData          
         ]
       }
     }, (err, result) => {
@@ -154,10 +155,8 @@ apiRouter.post("/gs_cost_input", (req, res) => {
   var wri = writer.replace(/\"/g, "");
   var wri = getName(wri);
   var wri = wri[0].name
+  const inputData = [date, wri, amount, content];
 
-
-
-  setTimeout(function(){
     const responseBody = {
       version: "2.0",
       template: {
@@ -171,9 +170,8 @@ apiRouter.post("/gs_cost_input", (req, res) => {
       },
     };
 
-    authorize(creden, inputCost);
+    authorize(creden, inputData, inputCost);
     res.status(200).send(responseBody);
-  }, 3000);
 });
 
 apiRouter.post("/air_content_input", (req, res) => {
