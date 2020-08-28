@@ -171,7 +171,10 @@ apiRouter.post("/gs_cost_input", (req, res) => {
     };
 
     authorize(creden, inputData, inputCost);
+    
+    setTimeout(function(){
     res.status(200).send(responseBody);
+    },1000);
 });
 
 apiRouter.post("/air_content_input", (req, res) => {
