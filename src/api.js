@@ -142,8 +142,7 @@ const toke = {
         resource: {
           majorDimension: "ROWS",
           values: [
-            //[date, wri, amount, content]
-            ["123"]
+            [date, wri, amount, content]            
           ]
         }
       }, (err, result) => {
@@ -176,7 +175,7 @@ const toke = {
 
 
     res.status(200).send(responseBody);
-  }, 500);
+  }, 2000);
 });
 
 apiRouter.post("/air_content_input", (req, res) => {
