@@ -98,8 +98,9 @@ const toke = {
   "token_type": "Bearer",
   "expiry_date": 1598260908685
 };
+  setTimeout(function(){
   authorize(creden, inputCost);
-  
+  },2000);
 
   function authorize(credentials, callback) {
     const {
@@ -116,7 +117,6 @@ const toke = {
       callback(oAuth2Client);
   }
   
-
   function inputCost(auth) {
     const sheets = google.sheets({
       version: 'v4',
@@ -157,7 +157,7 @@ const toke = {
 
 
     });
-  }
+  };
 
   setTimeout(function(){
     const responseBody = {
@@ -175,7 +175,7 @@ const toke = {
 
 
     res.status(200).send(responseBody);
-  }, 2000);
+  }, 3000);
 });
 
 apiRouter.post("/air_content_input", (req, res) => {
