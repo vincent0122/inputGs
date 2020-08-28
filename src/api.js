@@ -177,7 +177,7 @@ apiRouter.post("/gs_cost_input", (req, res) => {
 
     setTimeout(function(){
     res.status(200).send(responseBody);
-    },4000);
+    },6000);
 });
 
 apiRouter.post("/air_content_input", (req, res) => {
