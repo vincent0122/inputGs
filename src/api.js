@@ -148,6 +148,19 @@ function inputCost(auth, _inputData) {
 
 //클로저 함수 끝(for get record Id)
 apiRouter.post("/gs_cost_input", (req, res) => {
+  const responseBody = {
+    version: "2.0",
+    template: {
+      outputs: [
+        {
+          "simpleText": {
+            "text": "입력 완료되엇습니다!"
+          }
+        }
+      ]
+    }
+  };
+
   var amount = JSON.stringify(req.body.action.detailParams.amount.value);
   var amount = amount.replace(/\"/g, "");
   var content = req.body.action.detailParams.naeyong.origin;
@@ -158,22 +171,10 @@ apiRouter.post("/gs_cost_input", (req, res) => {
   const inputData = [date, wri, amount, content];
 
   
-    const responseBody = {
-      version: "2.0",
-      template: {
-        outputs: [
-          {
-            "simpleText": {
-              "text": "입력 완료되엇습니다!"
-            }
-          }
-        ]
-      }
-    };
   
-
-    res.status(200).send(responseBody);    
+    
     authorize(creden, inputData, inputCost);
+    res.status(200).send(responseBody);    
 });
 
 apiRouter.post("/air_content_input", (req, res) => {
