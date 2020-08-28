@@ -164,7 +164,7 @@ apiRouter.post("/gs_cost_input", (req, res) => {
 
   res.status(200).send(responseBody);    
 
-  var amount = JSON.stringify(req.body.action.detailParams.amount.value);
+/*   var amount = JSON.stringify(req.body.action.detailParams.amount.value);
   var amount = amount.replace(/\"/g, "");
   var content = req.body.action.detailParams.naeyong.origin;
   var writer = JSON.stringify(req.body.userRequest.user.id);
@@ -175,7 +175,7 @@ apiRouter.post("/gs_cost_input", (req, res) => {
 
   setTimeout(function (){
    authorize(creden, inputData, inputCost)  
-  },500);
+  },500); */
 });
 
 apiRouter.post("/air_content_input", (req, res) => {
