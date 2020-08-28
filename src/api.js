@@ -148,21 +148,8 @@ function inputCost(auth, _inputData) {
 
 //클로저 함수 끝(for get record Id)
 apiRouter.post("/gs_cost_input", (req, res) => {
- 
-
-  var amount = JSON.stringify(req.body.action.detailParams.amount.value);
-  var amount = amount.replace(/\"/g, "");
-  var content = req.body.action.detailParams.naeyong.origin;
-  var writer = JSON.stringify(req.body.userRequest.user.id);
-  var wri = writer.replace(/\"/g, "");
-  var wri = getName(wri);
-  var wri = wri[0].name
-  const inputData = [date, wri, amount, content];
-
-  setTimeout(function (){
-   authorize(creden, inputData, inputCost);
-
-   const responseBody = {
+  
+  const responseBody = {
     version: "2.0",
     template: {
       outputs: [
@@ -175,7 +162,19 @@ apiRouter.post("/gs_cost_input", (req, res) => {
     }
   };
 
-    res.status(200).send(responseBody);    
+  res.status(200).send(responseBody);    
+
+  var amount = JSON.stringify(req.body.action.detailParams.amount.value);
+  var amount = amount.replace(/\"/g, "");
+  var content = req.body.action.detailParams.naeyong.origin;
+  var writer = JSON.stringify(req.body.userRequest.user.id);
+  var wri = writer.replace(/\"/g, "");
+  var wri = getName(wri);
+  var wri = wri[0].name
+  const inputData = [date, wri, amount, content];
+
+  setTimeout(function (){
+   authorize(creden, inputData, inputCost)  
   },500);
 });
 
