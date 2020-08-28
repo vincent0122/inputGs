@@ -161,8 +161,7 @@ apiRouter.post("/gs_cost_input", (req, res) => {
       ]
     }
   };
-
-  res.status(200).send(responseBody);    
+  
 
   var amount = JSON.stringify(req.body.action.detailParams.amount.value);
   var amount = amount.replace(/\"/g, "");
@@ -174,7 +173,8 @@ apiRouter.post("/gs_cost_input", (req, res) => {
   const inputData = [date, wri, amount, content];
 
   setTimeout(function (){
-   authorize(creden, inputData, inputCost)  
+   authorize(creden, inputData, inputCost);
+   res.status(200).send(responseBody);  
   },500); 
 });
 
