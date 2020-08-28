@@ -174,6 +174,9 @@ apiRouter.post("/gs_cost_input", (req, res) => {
 
   setTimeout(function (){
    authorize(creden, inputData, inputCost);
+  },500);
+
+  setTimeout(function (){
    res.status(200).send(responseBody);  
   },1500); 
 });
