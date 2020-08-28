@@ -157,6 +157,7 @@ apiRouter.post("/gs_cost_input", (req, res) => {
   var wri = wri[0].name
   const inputData = [date, wri, amount, content];
 
+  setTimeout(function(){
     const responseBody = {
       version: "2.0",
       template: {
@@ -167,12 +168,10 @@ apiRouter.post("/gs_cost_input", (req, res) => {
             }
           }
         ]
-      },
+      }
     };
 
     authorize(creden, inputData, inputCost);
-    
-    setTimeout(function(){
     res.status(200).send(responseBody);
     },1000);
 });
