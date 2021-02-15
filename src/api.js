@@ -108,7 +108,7 @@ function inputCost(auth, _inputData) {
     version: 'v4',
     auth
   });
-  const mySpreadSheetId = '1SXZ9o5ca3B-bsUozboQrFOht8z_oqsX9U_bQTMl9ytQ';
+  const mySpreadSheetId = process.env.KAKAOSHEETID;
   const sheetName = 'kakaoInput';
 
   sheets.spreadsheets.values.get({
